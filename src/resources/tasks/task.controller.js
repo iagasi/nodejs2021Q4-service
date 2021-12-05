@@ -15,7 +15,8 @@ const {BOARDID,TASKID}=req.params
 
 
 const found=TASKS.find((task)=>task.boardId===BOARDID||task.id===TASKID)
-if(found!==undefined){
+
+if(found){
   reply
 .header("Content-Type","application/json")
 .send(found)  

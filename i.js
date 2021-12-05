@@ -4,9 +4,18 @@
 // const y=new User({name:"gell"})
 // console.log(y);
 
-let db=[{name:"asa",id:12}]
-
-
-//db.filter(user=>user.id===2)
-const y=db.filter((user)=>user.id!==12||user.name!=="aa")
-console.log(y);
+let TASKS=[  {
+     id: 'fa39a339-2840-4bb6-83a6-6cb9bd18845b',
+      title: 'Autotest task',
+        order: 0,
+      description: 'Lorem ipsum',
+        userId: null,
+       boardId: 'c5a623d4-b06d-426a-ab64-53bdc5aa29c5',
+       columnId: null
+    },{name:"asasa"}]
+const BOARDID='c5a623d4-b06d-426a-ab64-53bdc5aa29c5'
+    TASKS=TASKS.filter(el=>el.boardId!==BOARDID)
+// else{console.log("not found");}
+// console.log(i);
+// console.log(db);
+console.log(TASKS);

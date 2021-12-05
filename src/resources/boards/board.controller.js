@@ -1,8 +1,25 @@
 const boardService=require("./board.service")
 const boardModel=require("./board.model")
 const common=require("../commons")
+const TASKS=require("../tasks/task.memory.repository")
+
+
+const deletesTasksIfBoardDeleted=(BOARDID)=>{
+
+  let index
+  TASKS.forEach((el,i)=>{if(el.boardId===BOARDID){index=i}})
+  TASKS.splice(index,1)
+}
+
+
+
+
+
 
 // get All
+
+
+
 const getAll=()=>boardService.getAll()
 /// Get by id
 const getById=(req,reply)=>{
@@ -55,7 +72,10 @@ const deleteBoard=(req,reply)=>{
    
     const {id} = req.params
 const deleted=boardService.deleteBoard(id)
-if(deleted!==undefined){reply.send(deleted)}
+ 
+if(deleted!==undefined){
+ deletesTasksIfBoardDeleted(id)
+  reply.send(deleted)}
 else{reply.code(401).send()}
 
 }
