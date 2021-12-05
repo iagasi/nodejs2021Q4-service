@@ -1,9 +1,9 @@
 const db = [];
 
-const getAll = async() => 
-  // TODO: mock implementation. should be replaced during task development
-   db
-;
+const getAll =()=>db
+
+
+
 const create = (data) => db.push(data);
 
 

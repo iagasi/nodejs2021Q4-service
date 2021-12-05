@@ -5,21 +5,23 @@ const model=require("./task.model")
 const getAllTasks=(_,reply)=>
 {
     reply
-   // .header('Content-Type', 'application/json; charset=utf-8')
+  .code(200)
     .send(TASKS)
 }
+
+/// /gets Task by id
 const getTaskById=(req,reply)=>{
 const {BOARDID,TASKID}=req.params
 
 
 const found=TASKS.find((task)=>task.boardId===BOARDID||task.id===TASKID)
-if(found){
+if(found!==undefined){
   reply
 .header("Content-Type","application/json")
 .send(found)  
 }
 else{
-    reply.code(404).send("aaaa")
+    reply.code(404).send()
 }
 }
 /// Creates New Task
@@ -27,7 +29,7 @@ const createTask=(req,reply)=>{
     let options
     
     if(typeof req.body==="string"){options=JSON.parse(req.body)}
-    else(options=req.body)
+    else{options=req.body}
     const taskModel=model(options,{boardId:req.params.id})
     TASKS.push(taskModel)
     reply
@@ -61,9 +63,9 @@ reply
 .send(TASKS[foundindex])
 }
 else{
-  reply.send({body:{
-    status:" task not Found"
-  }})
+  reply
+  .code(401)
+  .send()
 }
 
 
@@ -83,11 +85,22 @@ else{
 
 const deleteTask=(req,reply)=>{
    const {BOARDID,TASKID}=req.params
- TASKS=TASKS.filter(task=>task.boardId!==BOARDID&&task.id!==TASKID)
+ const found=  TASKS.find(task=>task.boardId===BOARDID||task.id===TASKID)
+ if(found!==undefined){
+    TASKS=TASKS.filter(task=>task.boardId!==BOARDID&&task.id!==TASKID)
 
 reply
 .code(200)
 .send()
+ }
+else{
+  reply
+.code(404)
+.send()
+}
+
+
+
 }
 
 

@@ -5,9 +5,7 @@ const boardModel=(options)=>{
           
        
 const {id,title,columns}=options
-// const id=options.id
-// const title=options.title
-// const columns=options.columns
+
 
 
 

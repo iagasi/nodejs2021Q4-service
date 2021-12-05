@@ -1,6 +1,6 @@
 const supertest = require('supertest');
 const debug = require('debug')('rs:lib');
-
+const app = require('../../../src/server');
 const dotenv = require('dotenv');
 const path = require('path');
 
@@ -16,7 +16,7 @@ const host =
     : 'localhost:4000';
 debug('HOST', host);
 
-const request = supertest(host);
+const request =supertest(app.server)
 
 module.exports = {
   request,

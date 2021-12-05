@@ -3,23 +3,34 @@ const usersService = require('./user.service');
 
 
 
-let users
- usersService.getAll().then((e)=>{users=e});
+
+const users= usersService.getAll()
 
 const getAll=(req,reply)=>{
+    
+
+
     reply.code(200)
     reply.send(users.map((concreteUser)=>(User.toResponse(concreteUser))) );
 }
 
 
-const getById=(req,reply)=>{
+const getById=async(req,reply)=>{
     const {id} = req.params
-  
-    const foundUser=users.find(user=>user.id===id)
-    const modifiedUser=User.toResponse(foundUser)
+ // const users=usersService.getAll()
+        const foundUser=await users.find(user=>user.id===id)
+        if(foundUser!==undefined){
+            const modifiedUser=User.toResponse(foundUser)
     reply
     .code(200)
-    .send(modifiedUser)
+    .send(modifiedUser)  
+        }
+  
+  
+  else{
+    reply.code(401)
+    .send()
+  }
 }
 
 
@@ -36,6 +47,7 @@ const userDelete=(req,reply)=>{
 const userPost=(req,reply)=>{
     const newUser= new User({name:req.body.name,login:req.body.login,password:req.body.password})
     const {id} = newUser
+    // const users=usersService.getAll()
      usersService.create({...newUser})
      
     const newCreatedUser=users.find(user=>user.id===id) 

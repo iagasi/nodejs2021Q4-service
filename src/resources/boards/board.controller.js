@@ -43,17 +43,20 @@ const modifyBoard=(req,reply)=>{
     const receivedOptions=req.body
     const options=boardModel(receivedOptions)
    const ModifiedBoardInDb= boardService.modifyBoard(id,options)
+if(ModifiedBoardInDb){
+  reply
+.send(ModifiedBoardInDb)  
+}
+  else{reply.code(401).send()}
 
-  
-reply
-.send(ModifiedBoardInDb)
 }
 // DDELETES BOARD
 const deleteBoard=(req,reply)=>{
    
     const {id} = req.params
 const deleted=boardService.deleteBoard(id)
+if(deleted!==undefined){reply.send(deleted)}
+else{reply.code(401).send()}
 
-reply.send(deleted)
 }
 module.exports={getAll,getById,createBoard,modifyBoard,deleteBoard}

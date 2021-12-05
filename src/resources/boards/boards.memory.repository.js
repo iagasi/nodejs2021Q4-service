@@ -17,7 +17,7 @@ const modifyBoard=(id,options)=>{
  let foundBoardIndex
 boards.find((board,index)=>{
   if (board.id.toString()===id){foundBoardIndex= index ;return""}
-return null 
+ return foundBoardIndex
 })
 
 
@@ -25,6 +25,7 @@ if(foundBoardIndex||foundBoardIndex===0){
   
   boards[foundBoardIndex].title=options.title
   boards[foundBoardIndex].columns=options.columns
+  
 
 }
 
@@ -36,8 +37,11 @@ const deleteBoard=(id)=>{
   let deletedUser=""
  
 boards.forEach((element,index) => {
-  if(element.id===id){boards.splice(index,1)}
-  deletedUser=element
+  if(element.id===id){boards.splice(index,1)
+    deletedUser=element
+  }
+
+  else{deletedUser=undefined}
 });
   return deletedUser
 
