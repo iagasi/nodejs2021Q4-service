@@ -1,8 +1,10 @@
-const routes=require("../lib")
-const controller=require("./task.controller")
+import { FastifyInstance, FastifyPluginOptions } from "fastify"
+
+import routes from"../lib"
+import controller from "./task.controller"
 
 
-const taskRouter=(fastify,options,done)=>{
+const taskRouter=(fastify:FastifyInstance,_:FastifyPluginOptions,done:any)=>{
 
   fastify.get(routes.tasks.getById(":BOARDID",":TASKID"),(req,reply)=>{
 
@@ -32,4 +34,4 @@ fastify.delete(routes.tasks.delete(":BOARDID",":TASKID"),(req,reply)=>{
 done()
 }
 
-module.exports=taskRouter
+export default taskRouter

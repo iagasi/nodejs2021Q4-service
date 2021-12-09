@@ -1,3 +1,4 @@
+import { FastifyInstance } from "fastify"
 
 
 const lib=require("../lib")
@@ -6,7 +7,7 @@ const controller=require("./user.controller")
 
 
 
-const getAllUsers=async (fastify,options,done) => {
+const getAllUsers=async (fastify:FastifyInstance) => {
 
 
 
@@ -39,7 +40,7 @@ fastify.delete(lib.users.delete(":id"),(req,reply)=>{
 controller.userDelete(req,reply)
 })
 
- done()
+
 }
 
 module.exports =getAllUsers;
