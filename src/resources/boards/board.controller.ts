@@ -1,33 +1,23 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { IBoard, IReceivedRequestBody } from "./interfaces"
 
-
-
 import boardService from "./board.service"
 import boardModel from"./board.model"
 
 
-// TASKS=require("../tasks/task.memory.repository")
-
-
-// const deletesTasksIfBoardDeleted=(BOARDID)=>{
-
-//   let index
-//   TASKS.forEach((el,i)=>{if(el.boardId===BOARDID){index=i}})
-//   TASKS.splice(index,1)
-// }
-
-
-
-
-
-
-// get All
-
-
-
+/**
+ * 
+ * @returns Array of Boards
+ */
 const getAll=()=>boardService.getAll()
-/// Get by id
+
+
+/**
+ *  GET BY ID
+ * @param req.params.id
+ * @param reply.code(200)  |  .code(404)
+ * @returns   board  found By Id
+ */
 const getById=(req:FastifyRequest,reply:FastifyReply)=>{
     const {id} = req.params as {id:string}
     const board=boardService.getById(id)
@@ -45,7 +35,13 @@ const getById=(req:FastifyRequest,reply:FastifyReply)=>{
 
 
 
-// CREATES NEW BOARD
+
+/**
+ *  CREATES NEW BOARD
+ * @param req.body  takes   id:string,title:string,columns:Array
+ * @param reply  .code(201)||.code(500)
+ * @returns  new Created Board
+ */
 const createBoard=(req:FastifyRequest,reply:FastifyReply)=>{
    let options :IReceivedRequestBody
   if(typeof req.body==="string"){options=JSON.parse(req.body)}
@@ -63,13 +59,17 @@ reply
 .send(newCreatedBoard)
 }
 
-
-
 }
 
 
 
-/// MODIFY BOARD
+
+/** 
+ * Modifies existing Board
+ * @param req.parms.id  finds board for modifiing 
+ * @params req.params.body   takes new  body for modifying
+ * @param reply  code(200).send(MODIFIED BOARD)  ||  code (401)
+ */
 const modifyBoard=(req:FastifyRequest,reply:FastifyReply)=>{
     const {id} = req.params as { id: string }
     const receivedOptions=req.body as {id:string,title:string,columns:Array<object>}
@@ -86,7 +86,12 @@ else{reply.code(401).send()}
   
 
 }
-// DDELETES BOARD
+
+/**
+ *  DDELETES BOARD
+ * @param req.params.id
+ * @param reply   .code(200).send(DeletedBoard)  ||  .code(401)
+ */
 const deleteBoard=(req:FastifyRequest,reply:FastifyReply)=>{
    
     const {id} = req.params as { id: string }
