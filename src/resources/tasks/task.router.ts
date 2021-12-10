@@ -4,7 +4,7 @@ import routes from"../lib"
 import controller from "./task.controller"
 
 
-const taskRouter=(fastify:FastifyInstance,_:FastifyPluginOptions,done:any)=>{
+const taskRouter=async (fastify:FastifyInstance,_:FastifyPluginOptions)=>{
 
   fastify.get(routes.tasks.getById(":BOARDID",":TASKID"),(req,reply)=>{
 
@@ -31,7 +31,7 @@ fastify.put(routes.tasks.update(":BOARDID",":TASKID"),(req,reply)=>{
 fastify.delete(routes.tasks.delete(":BOARDID",":TASKID"),(req,reply)=>{
   controller.deleteTask(req,reply)
 })
-done()
+
 }
 
 export default taskRouter

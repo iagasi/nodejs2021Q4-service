@@ -1,5 +1,6 @@
-const { v4: uuidv4 } = require('uuid')
 import { IBoard, IReceivedRequestBody } from "./interfaces";
+
+import { v4 as uuidv4 } from 'uuid'
 
 
 
@@ -7,7 +8,7 @@ import { IBoard, IReceivedRequestBody } from "./interfaces";
 
 const boardModel = (options: IReceivedRequestBody) => {
 
-    let { id, title, columns, } = options
+    const { id, title, columns, } = options
 
     if (!title || !columns || !Array.isArray(columns)) { return ("Error required options missinsg"); }
     

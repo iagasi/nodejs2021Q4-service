@@ -1,9 +1,9 @@
 import { FastifyInstance } from "fastify"
 
+import controller from "./user.controller"
 
-const lib=require("../lib")
 
-const controller=require("./user.controller")
+import lib from "../lib"
 
 
 

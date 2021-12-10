@@ -2,8 +2,8 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import { RouteGenericInterface } from 'fastify/types/route';
 
 import { IReqParams, IReq } from './inerfaces';
-import {tasks,setTasks} from './task.memory.repository';
-//import setTasks from './task.memory.repository';
+import { tasks, setTasks } from './task.memory.repository';
+// import setTasks from './task.memory.repository';
 import model from './task.model';
 
 interface IReqBody {
@@ -31,7 +31,7 @@ const getTaskById = (req: FastifyRequest, reply: FastifyReply) => {
 
 /// Creates New Task
 const createTask = (
-  req: FastifyRequest<{ Params: { id: string } }>,
+  req: FastifyRequest,
   reply: FastifyReply
 ) => {
   let options;
@@ -41,14 +41,14 @@ const createTask = (
   } else {
     options = req.body;
   }
-  const id = req.params.id;
+  const {id} = req.params  as {id:string}
   const taskModel = model(options, id);
   tasks.push(taskModel);
   reply.code(201).send(taskModel);
 };
 
 /// Updates existing TASK
-const updateTask = (req: IReq, reply: FastifyReply) => {
+const updateTask = (req: FastifyRequest, reply: FastifyReply) => {
   const { BOARDID, TASKID } = req.params as IReqParams;
 
   let foundindex;
@@ -60,9 +60,11 @@ const updateTask = (req: IReq, reply: FastifyReply) => {
   });
 
   if (foundindex !== undefined) {
-    tasks[foundindex].title = req.body.title;
-    tasks[foundindex].order = req.body.order;
-    tasks[foundindex].description = req.body.description;
+
+    const {title,order,description}=req.body as {title:string,order:string,description:string }
+    tasks[foundindex].title = title;
+    tasks[foundindex].order = order;
+    tasks[foundindex].description = description;
 
     reply.header('Content-Type', 'application/json').send(tasks[foundindex]);
   } else {
@@ -78,10 +80,10 @@ const deleteTask = (req: FastifyRequest, reply: FastifyReply) => {
     (task) => task.boardId === BOARDID || task.id === TASKID
   );
   if (found !== undefined) {
-    const modified= tasks.filter(
+    const modified = tasks.filter(
       (task) => task.boardId !== BOARDID && task.id !== TASKID
     );
-    setTasks(modified)
+    setTasks(modified);
     reply.code(200).send();
   } else {
     reply.code(404).send();

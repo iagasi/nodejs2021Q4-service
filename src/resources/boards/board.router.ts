@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyPluginCallback, FastifyPluginOptions, FastifyRegisterOptions, FastifyReply, FastifyRequest } from "fastify"
 
-const controller=require("./board.controller")
-const routes=require("../lib")
+import controller from "./board.controller"
+import routes from "../lib"
 
 const boardRouter=async(fastify:FastifyInstance,options:FastifyPluginOptions)=>{
 
@@ -20,7 +20,9 @@ fastify.get(routes.boards.getById(":id"),(req:FastifyRequest,reply:FastifyReply)
  controller.getById(req,reply)
 })
 
-
+/**
+ * 
+ */
 fastify.post(routes.boards.create,(req:FastifyRequest,reply:FastifyReply)=>{
     controller.createBoard(req,reply)
    })

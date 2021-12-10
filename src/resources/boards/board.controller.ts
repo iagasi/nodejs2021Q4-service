@@ -22,7 +22,7 @@ import boardModel from"./board.model"
 
 
 
-//get All
+// get All
 
 
 
@@ -51,8 +51,8 @@ const createBoard=(req:FastifyRequest,reply:FastifyReply)=>{
   if(typeof req.body==="string"){options=JSON.parse(req.body)}
  else{options=req.body as{id:string,title:string,columns:[]}}
 
-let newCreatedBoard =boardModel(options)
-if(typeof newCreatedBoard=="string"){
+const newCreatedBoard =boardModel(options)
+if(typeof newCreatedBoard==="string"){
  reply 
  .code(500)
  .send(newCreatedBoard)
@@ -74,9 +74,10 @@ const modifyBoard=(req:FastifyRequest,reply:FastifyReply)=>{
     const {id} = req.params as { id: string }
     const receivedOptions=req.body as {id:string,title:string,columns:Array<object>}
     const board=boardModel(receivedOptions)
-if(typeof board=="object"){
+if(typeof board==="object"){
  const ModifiedBoardInDb=  boardService.modifyBoard(id,board)
  reply
+ .header("Content-Type","application/json")
  .send(ModifiedBoardInDb)  
 }
 else{reply.code(401).send()}
@@ -92,9 +93,9 @@ const deleteBoard=(req:FastifyRequest,reply:FastifyReply)=>{
 const deleted=boardService.deleteBoard(id)
  
 if(deleted!==undefined){
- //deletesTasksIfBoardDeleted(id)
+ // deletesTasksIfBoardDeleted(id)
   reply.send(deleted)}
 else{reply.code(401).send()}
 
 }
-module.exports={getAll,getById,createBoard,modifyBoard,deleteBoard}
+export default {getAll,getById,createBoard,modifyBoard,deleteBoard}

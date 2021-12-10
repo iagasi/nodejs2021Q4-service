@@ -6,6 +6,6 @@ const setTasks=(mod:Array<ITask>)=>{
 tasks=mod
 }
 
-export {tasks,setTasks} 
+export  {tasks,setTasks} 
 
 

@@ -1,10 +1,9 @@
-import fastify,{ FastifyReply} from "fastify"
+import fastify,{ FastifyReply,FastifyPluginCallback} from "fastify"
 // const swaggerUI = require('fastify-swagger');
 // const path = require('path');
 // const YAML = require('yamljs');
-// import userRouter from './resources/users/user.router';
- 
-// import taskRouter from "./resources/tasks/task.router";
+import userRouter from './resources/users/user.router';
+import taskRouter from "./resources/tasks/task.router";
 import boardrouter from "./resources/boards/board.router"
 //
 const app= fastify();
@@ -14,8 +13,8 @@ const app= fastify();
 
 
 app.register(boardrouter)
-// app.register( userRouter);
-// app.register(taskRouter)
+app.register( userRouter);
+app.register(taskRouter)
 
 
 
