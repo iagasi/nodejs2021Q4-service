@@ -1,7 +1,9 @@
-const usersRepo = require('./user.memory.repository');
+import { IUser } from "./interfaces";
+
+import usersRepo from "./user.memory.repository"
 
 const getAll = () => usersRepo.getAll();
-const create=(data)=>usersRepo.create(data)
-const modify=(id,options)=>usersRepo.modify(id,options)
-const deleteUser=(id)=>usersRepo.deleteUser(id)
-module.exports = { getAll,create ,modify,deleteUser};
+const create=(data:IUser)=>usersRepo.create(data)
+const modify=(id:string,options:IUser)=>usersRepo.modify(id,options)
+const deleteUser=(id:string)=>usersRepo.deleteUser(id)
+export { getAll,create ,modify,deleteUser};

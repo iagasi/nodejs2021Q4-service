@@ -1,22 +1,25 @@
-const User = require('./user.model');
-const usersService = require('./user.service');
+import { FastifyReply, FastifyRequest } from "fastify";
+import { IUser } from "./interfaces";
+
+import User from './user.model'
+import usersService from './user.service'
 
 
 
 
 const users= usersService.getAll()
 
-const getAll=(req,reply)=>{
+const getAll=(req:FastifyRequest,reply:FastifyReply)=>{
     
 
 
     reply.code(200)
-    reply.send(users.map((concreteUser)=>(User.toResponse(concreteUser))) );
+    reply.send(users.map((concreteUser:IUser)=>(User.toResponse(concreteUser))) );
 }
 
 
-const getById=async(req,reply)=>{
-    const {id} = req.params
+const getById=async(req:FastifyRequest,reply:FastifyReply)=>{
+    const {id} = req.params as {id:string}
  // const users=usersService.getAll()
         const foundUser=await users.find(user=>user.id===id)
         if(foundUser!==undefined){
@@ -35,8 +38,8 @@ const getById=async(req,reply)=>{
 
 
 
-const userDelete=(req,reply)=>{
-    const {id} = req.params.id
+const userDelete=(req:FastifyRequest,reply:FastifyReply)=>{
+    const {id} = req.params as {id:string}
 
     usersService.deleteUser(id)
     reply.code(200)
@@ -44,29 +47,40 @@ const userDelete=(req,reply)=>{
 }
 
 
-const userPost=(req,reply)=>{
-    const newUser= new User({name:req.body.name,login:req.body.login,password:req.body.password})
+const userPost=(req:FastifyRequest,reply:FastifyReply)=>{
+    const{name,login,password}=req.body as {name:string,login:string,password:string}
+    const newUser :IUser= new User({name,login,password})
     const {id} = newUser
     // const users=usersService.getAll()
      usersService.create({...newUser})
      
     const newCreatedUser=users.find(user=>user.id===id) 
-    
-    const modificietUserForFesponse=User.toResponse(newCreatedUser)
-  
+    if(newCreatedUser){
+        const modificietUserForFesponse=User.toResponse(newCreatedUser)
+
     reply
     .code(201)
     .header('Content-Type', 'application/json')
     .send(modificietUserForFesponse)
+
+    }
 }
 
 
-const userPut=(req,reply)=>{
-    const {id} = req.params
-const modifiedUser= usersService.modify(id,req.body)
-const modForReply=User.toResponse(modifiedUser)
+const userPut=(req:FastifyRequest,reply:FastifyReply)=>{
+    const {id} = req.params as {id:string}
+  
+const modifiedUser= usersService.modify(id,req.body as IUser)
+if(modifiedUser){
+  const modForReply=User.toResponse(modifiedUser)
 reply
-.send(modForReply)
+.send(modForReply)   
 }
+else{
+    reply.send("cannot find this user")
+}
+    }
 
-module.exports={getAll,getById,userDelete,userPost,userPut}
+
+
+export {getAll,getById,userDelete,userPost,userPut}

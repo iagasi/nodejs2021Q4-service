@@ -3,7 +3,7 @@ import { FastifyInstance, FastifyPluginCallback, FastifyPluginOptions, FastifyRe
 const controller=require("./board.controller")
 const routes=require("../lib")
 
-const boardRouter=(fastify:FastifyInstance,options:FastifyPluginOptions,done:any)=>{
+const boardRouter=async(fastify:FastifyInstance,options:FastifyPluginOptions)=>{
 
 
 
@@ -32,7 +32,7 @@ fastify.post(routes.boards.create,(req:FastifyRequest,reply:FastifyReply)=>{
      
        controller.deleteBoard(req,reply)
    })
-done()
+
 
 
 

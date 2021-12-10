@@ -1,20 +1,20 @@
-const db = [];
+import { IUser } from "./interfaces";
+
+let db:Array<IUser> = [];
 
 const getAll =()=>db
 
 
 
-const create = (data) => db.push(data);
+const create = (data:IUser) => db.push(data);
 
 
 
-const modify =  (id, options) => {
+const modify =  (id:string, options:IUser) => {
   const modifiedUser=db.find((user, index) => {
 let moddedUSER
     if (user.id === id) {
-      if (options.age) {
-        db[index].age =  options.age;
-      }
+     
       if (options.name) {
        db[index].name = options.name;
       }
@@ -37,12 +37,12 @@ return moddedUSER
 
 };
 
-const deleteUser=(id)=>{
-db.filter(user=>user.id===!id)
+const deleteUser=(id:string)=>{
+db=db.filter(user=>user.id!==id)
 
 }
 
 
-module.exports = { getAll, create ,modify,deleteUser};
+export= { getAll, create ,modify,deleteUser};
 
 

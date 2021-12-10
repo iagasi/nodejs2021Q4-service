@@ -43,4 +43,4 @@ controller.userDelete(req,reply)
 
 }
 
-module.exports =getAllUsers;
+export default getAllUsers
