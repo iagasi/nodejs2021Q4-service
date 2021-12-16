@@ -6,4 +6,10 @@ interface IUser{
   
   }
 
-  export {IUser}
+  interface ReqBody{
+    name: string;
+    login: string;
+    password: string;
+  }
+
+  export {IUser,ReqBody}

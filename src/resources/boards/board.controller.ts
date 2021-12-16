@@ -1,9 +1,10 @@
 import { FastifyReply, FastifyRequest } from "fastify"
-import { IBoard, IReceivedRequestBody } from "./interfaces"
+import {  IReceivedRequestBody } from "./interfaces"
 
 import boardService from "./board.service"
 import boardModel from"./board.model"
 
+import taskController from "../tasks/task.controller"
 
 /**
  * 
@@ -96,6 +97,7 @@ const deleteBoard=(req:FastifyRequest,reply:FastifyReply)=>{
    
     const {id} = req.params as { id: string }
 const deleted=boardService.deleteBoard(id)
+taskController.deleteBoardTasks(id)
  
 if(deleted!==undefined){
  // deletesTasksIfBoardDeleted(id)

@@ -1,4 +1,6 @@
-import { IBoard } from "../boards/interfaces";
+
+
+import { v4 as uuidv4 } from 'uuid'
 
 interface IUser{
   id:string
@@ -7,9 +9,10 @@ interface IUser{
   password:string
 
 }
-
-import { v4 as uuidv4 } from 'uuid'
-
+/**
+ * this class generates id
+ * this class
+ */
 class User  implements IUser {
   id:string
 
@@ -30,7 +33,11 @@ class User  implements IUser {
     this.login = login;
     this.password = password;
   }
-
+/**
+ * this metod retunrns NO PASSWORD
+ * @params userInfo @type { id, name, login,password }
+ * @returns { id, name, login }
+ */
   static toResponse(user:IUser) {
     const { id, name, login } = user;
     return { id, name, login };

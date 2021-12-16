@@ -1,10 +1,10 @@
-import { FastifyInstance, FastifyPluginOptions } from "fastify"
+import { FastifyInstance, } from "fastify"
 
 import routes from"../lib"
 import controller from "./task.controller"
 
 
-const taskRouter=async (fastify:FastifyInstance,_:FastifyPluginOptions)=>{
+const taskRouter=async (fastify:FastifyInstance)=>{
 
   fastify.get(routes.tasks.getById(":BOARDID",":TASKID"),(req,reply)=>{
 

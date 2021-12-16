@@ -11,8 +11,8 @@ interface ITask {
   title: string,
   order: string,
   description: string,
-  userId: string,
-  boardId: string,
+  userId: string|null,
+  boardId: string|null
   columnId: string,
 }
 

@@ -21,7 +21,8 @@
 // console.log(TASKS);
 
 
-const db=[{id:1},{id:2}]
+const users=[{id:1},{id:1}]
 const id=1
-let a=db.filter(user=>user.id!==1)
-console.log(a);
+
+const newCreatedUser =  users.find((user) => user.id === id);
+console.log(newCreatedUser);

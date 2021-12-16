@@ -1,5 +1,5 @@
 import repositoryService from "./boards.memory.repository"
-import { IBoard, IReceivedRequestBody } from "./interfaces"
+import { IBoard,} from "./interfaces"
 
 
 

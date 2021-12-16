@@ -1,12 +1,15 @@
-import { FastifyInstance, FastifyPluginCallback, FastifyPluginOptions, FastifyRegisterOptions, FastifyReply, FastifyRequest } from "fastify"
+import { FastifyInstance, FastifyPluginOptions, FastifyReply, FastifyRequest } from "fastify"
 
 import controller from "./board.controller"
 import routes from "../lib"
 
-const boardRouter=async(fastify:FastifyInstance,options:FastifyPluginOptions)=>{
+const boardRouter=async(fastify:FastifyInstance,)=>{
 
 
-
+/**
+ * @returns   .code(200) .send(All boards from db)
+  
+ */
 fastify.get(routes.boards.getAll,(req:FastifyRequest,reply:FastifyReply)=>{
 const getAllBoards=controller.getAll()
 
@@ -15,7 +18,9 @@ const getAllBoards=controller.getAll()
     .code(200)
     .send(getAllBoards)
 })
-
+/**
+ * @
+ */
 fastify.get(routes.boards.getById(":id"),(req:FastifyRequest,reply:FastifyReply)=>{
  controller.getById(req,reply)
 })

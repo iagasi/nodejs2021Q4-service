@@ -1,14 +1,12 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { RouteGenericInterface } from 'fastify/types/route';
 
-import { IReqParams, IReq } from './inerfaces';
+
+import { IReqParams } from './inerfaces';
 import { tasks, setTasks } from './task.memory.repository';
 // import setTasks from './task.memory.repository';
 import model from './task.model';
 
-interface IReqBody {
-  id: string;
-}
+
 
 const getAllTasks = (_: FastifyRequest, reply: FastifyReply) => {
   reply.code(200).send(tasks);
@@ -17,13 +15,16 @@ const getAllTasks = (_: FastifyRequest, reply: FastifyReply) => {
 /// /gets Task by id
 const getTaskById = (req: FastifyRequest, reply: FastifyReply) => {
   const { BOARDID, TASKID } = req.params as IReqParams;
+console.log(TASKID);
 
   const found = tasks.find(
     (task) => task.boardId === BOARDID || task.id === TASKID
   );
 
   if (found) {
-    reply.header('Content-Type', 'application/json').send(found);
+    reply
+    .code(200)
+    .header('Content-Type', 'application/json').send(found);
   } else {
     reply.code(404).send();
   }
@@ -79,15 +80,36 @@ const deleteTask = (req: FastifyRequest, reply: FastifyReply) => {
   const found = tasks.find(
     (task) => task.boardId === BOARDID || task.id === TASKID
   );
-  if (found !== undefined) {
+  if (found ) {
     const modified = tasks.filter(
       (task) => task.boardId !== BOARDID && task.id !== TASKID
     );
     setTasks(modified);
     reply.code(200).send();
   } else {
-    reply.code(404).send();
+    reply.code(204).send()
   }
 };
 
-export default { getAllTasks, createTask, getTaskById, deleteTask, updateTask };
+ const unasighnUser=async(id:string)=>{
+  
+   
+  tasks.forEach((task,index)=>{
+    if(task.userId===id){
+      tasks[index].userId=null
+    }
+  })
+  console.log(tasks);
+  
+
+}
+ const deleteBoardTasks=(boardId:string)=>{
+const mod=tasks.filter(task=>task.boardId !== boardId)
+setTasks(mod)
+
+
+ }
+  
+
+
+export default { getAllTasks, createTask, getTaskById, deleteTask, updateTask,unasighnUser,deleteBoardTasks}

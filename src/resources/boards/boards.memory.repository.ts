@@ -3,18 +3,38 @@ import { IBoard } from "./interfaces"
 
 
 const boards:Array<IBoard>=[]
-
+/**
+ * 
+ * @returns ALL Boards
+ *  @type {Array<object>}
+ */
 const getAll=():Array<IBoard>=>boards
 
+
+/**
+ * @params id @type {string}
+ * @returns found Board in array @type {object}
+ */
 const getById=(id:string)=>{
   const foundBoard=boards.find((board:IBoard)=>board.id===id)
  return foundBoard
 }
 
+/**
+ * Creates New Board In Array
+ * @param {id:string ,title:string,columns:Array<string>}  board 
+ * @returns {void}
+ * 
+ */
 const createBoard=(board:IBoard)=>{
 boards.push(board)
 }
-/// /REFACtor this
+/**
+ * 
+ * @param {string} id 
+ * @param {{id:string ,title:string,columns:Array<string>}}options 
+ * @returns  found  boarts @type {IBoard}
+ */
 const modifyBoard=(id:string,options:IBoard)=>{
   
  let foundBoardIndex:number|undefined

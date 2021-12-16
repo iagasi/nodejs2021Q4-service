@@ -1,14 +1,14 @@
+import { v4 as uuidv4 } from 'uuid'
 import { IBoard, IReceivedRequestBody } from "./interfaces";
 
-import { v4 as uuidv4 } from 'uuid'
 
 
 
 
 /**
- * 
- * @param options  as { id:string||undefined, title:string, columns:Array, }
- * @returns    new object   { id:uuidv4() title, columns, }
+ * Generates id if id nudefined
+ * @param options  @type { id:string||undefined, title:string, columns:Array, }
+ * @returns    new object @type  { id:uuidv4() title, columns, }
  */
 const boardModel = (options: IReceivedRequestBody) => {
 

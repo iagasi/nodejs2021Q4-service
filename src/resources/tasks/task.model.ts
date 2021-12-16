@@ -1,8 +1,8 @@
+import { v4 as uuidv4 } from 'uuid'
 import { ITask } from "./inerfaces"
 
-import { v4 as uuidv4 } from 'uuid'
 
-function taskModel(options:ITask,  boaidId: string){
+function taskModel(options:ITask,  boaidId: string|null){
 
     const{id,title,order,description,columnId,userId}=options
 
