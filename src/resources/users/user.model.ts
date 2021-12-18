@@ -21,7 +21,11 @@ class User  implements IUser {
   login:string
 
   password:string
-
+/**
+ * generates id with uuid
+ * @param param0 {req.body}
+ * 
+ */
   constructor({
     id = uuidv4(),
     name = 'USER',
@@ -35,7 +39,7 @@ class User  implements IUser {
   }
 /**
  * this metod retunrns NO PASSWORD
- * @params userInfo @type { id, name, login,password }
+ * @params user @type { id, name, login,password }
  * @returns { id, name, login }
  */
   static toResponse(user:IUser) {

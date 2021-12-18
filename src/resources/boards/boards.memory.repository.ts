@@ -30,7 +30,7 @@ const createBoard=(board:IBoard)=>{
 boards.push(board)
 }
 /**
- * 
+ * Modifies existing Board by id id remains ame
  * @param {string} id 
  * @param {{id:string ,title:string,columns:Array<string>}}options 
  * @returns  found  boarts @type {IBoard}
@@ -43,19 +43,21 @@ boards.find((board,index)=>{
  return foundBoardIndex
 })
 
-
 if(foundBoardIndex||foundBoardIndex===0){
-  
   boards[foundBoardIndex].title=options.title
   boards[foundBoardIndex].columns=options.columns
-  
-
 }
-
 else{return undefined}
-
 }
 
+/**
+ * Delete board by id
+ * @param id
+ * @
+ * @returns deleted Board @type {object}
+ * or
+ * @returns {undefined}
+ */
 const deleteBoard=(id:string)=>{
   let deletedUser:IBoard|undefined
  

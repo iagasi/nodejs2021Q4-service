@@ -7,7 +7,7 @@ const boardRouter=async(fastify:FastifyInstance,)=>{
 
 
 /**
- * @returns   .code(200) .send(All boards from db)
+ * @returns   .code(200) .send(All boards from db) @type {Array}
   
  */
 fastify.get(routes.boards.getAll,(req:FastifyRequest,reply:FastifyReply)=>{
@@ -19,22 +19,30 @@ const getAllBoards=controller.getAll()
     .send(getAllBoards)
 })
 /**
- * @
+ * @function fastify.get(:id) calls with HTTP.get request with Dynamic ID
+ *
  */
 fastify.get(routes.boards.getById(":id"),(req:FastifyRequest,reply:FastifyReply)=>{
  controller.getById(req,reply)
 })
 
 /**
- * 
+ *  @function fastify.post() calls with HTTP.post 
  */
 fastify.post(routes.boards.create,(req:FastifyRequest,reply:FastifyReply)=>{
     controller.createBoard(req,reply)
    })
+
+/**
+ *  @function fastify.put(:id) calls with HTTP.put request with Dynamic ID 
+ */
    fastify.put(routes.boards.update(":id"),(req:FastifyRequest,reply:FastifyReply)=>{
     controller.modifyBoard(req,reply)
    })
-
+/**
+ *  @function fastify.delete(:id) calls with HTTP.delete request with Dynamic ID 
+ * 
+ */
    fastify.delete(routes.boards.delete(":id"),(req:FastifyRequest,reply:FastifyReply)=>{
      
        controller.deleteBoard(req,reply)

@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify"
-import {  IReceivedRequestBody } from "./interfaces"
+import {  IBoard, IReceivedRequestBody } from "./interfaces"
 
 import boardService from "./board.service"
 import boardModel from"./board.model"
@@ -7,10 +7,10 @@ import boardModel from"./board.model"
 import taskController from "../tasks/task.controller"
 
 /**
- * 
- * @returns Array of Boards
+ * Returns Array of Boards
+ * @returns {Array<IBoard>}
  */
-const getAll=()=>boardService.getAll()
+const getAll=(): Array<IBoard>=>boardService.getAll()
 
 
 /**
@@ -89,7 +89,7 @@ else{reply.code(401).send()}
 }
 
 /**
- *  DDELETES BOARD
+ *  DELETES BOARD
  * @param req.params.id
  * @param reply   .code(200).send(DeletedBoard)  ||  .code(401)
  */
@@ -100,7 +100,7 @@ const deleted=boardService.deleteBoard(id)
 taskController.deleteBoardTasks(id)
  
 if(deleted!==undefined){
- // deletesTasksIfBoardDeleted(id)
+
   reply.send(deleted)}
 else{reply.code(401).send()}
 

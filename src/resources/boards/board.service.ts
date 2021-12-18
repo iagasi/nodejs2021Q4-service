@@ -2,7 +2,10 @@ import repositoryService from "./boards.memory.repository"
 import { IBoard,} from "./interfaces"
 
 
-
+/**
+ * 
+ *  Connects @module board.controller with @module board.memory.repository
+ */
 
 const getAll=()=>repositoryService.getAll()
 const getById=(id:string)=>repositoryService.getById(id)
