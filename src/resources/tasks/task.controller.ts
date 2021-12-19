@@ -4,11 +4,15 @@ import { ReplyDefault } from 'fastify/types/utils';
 
 import { IReqParams } from './inerfaces';
 import { tasks, setTasks } from './task.memory.repository';
-// import setTasks from './task.memory.repository';
 import model from './task.model';
 
 
-
+/**
+ * returns all tasks
+ * @param _ 
+ * @param reply 
+ * @return reply (AllTasks)
+ */
 const getAllTasks = (_: FastifyRequest, reply: FastifyReply) => {
   reply.code(200).send(tasks);
 };

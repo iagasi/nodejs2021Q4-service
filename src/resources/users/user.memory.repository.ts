@@ -1,23 +1,33 @@
 import { IUser } from "./interfaces";
 
 let db: Array<IUser> = [];
-
+/**
+ * 
+ * @returns all db @type {Array<IUser>  }
+ */
 const getAll = () => db
 
 
-
+/**
+ * Pushes new user to Db
+ * @param data 
+ *
+ */
 const create = (data: IUser) => db.push(data)
 
 
 
 
-
+/**
+ * Modifies existin user by ID
+ * @param id 
+ * @param options 
+ * @returns modified user || undefined
+ */
 const modify = (id: string, options: IUser) => {
   const index = db.findIndex(user => user.id===id );
   
-// console.log("ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"+index);
-// console.log(db)
-// console.log(id);
+
 
 if(index!==-1)
 {
@@ -32,14 +42,11 @@ if(index!==-1)
   }
    return db[index]
 }
-  
-
-  
-     
-  
-
 }
-
+/**
+ * Deletes existing user By id
+ * @param id 
+ */
 const deleteUser = (id: string) => {
   db = db.filter(user => user.id !== id)
 

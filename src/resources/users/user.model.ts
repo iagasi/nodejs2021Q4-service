@@ -11,7 +11,7 @@ interface IUser{
 }
 /**
  * this class generates id
- * this class
+ * this class generates user
  */
 class User  implements IUser {
   id:string

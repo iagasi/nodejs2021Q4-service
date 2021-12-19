@@ -10,7 +10,8 @@ import unasighnUser from "../tasks/task.controller"
 /**
  *
  * @param req -null
- * @param reply.send(200) @type { Array<object>}  without password
+ * @param reply
+ * @returns reply.send(200) @type { Array<object>}  without password
  */
 const getAll = (req: FastifyRequest, reply: FastifyReply) => {
   const users = usersService.getAll();
@@ -18,6 +19,13 @@ const getAll = (req: FastifyRequest, reply: FastifyReply) => {
   reply.send(users.map((concreteUser: IUser) => User.toResponse(concreteUser)));
 };
 
+ /**
+  * finds user by id 
+  * @param req FastifyRequest
+  * @param reply FastifyReply
+  * returns found user | type string 'not found this user id'
+  * 
+  */
 const getById = async (req: FastifyRequest, reply: FastifyReply) => {
   const users = usersService.getAll();
   const { id } = req.params as { id: string };
@@ -30,7 +38,12 @@ const getById = async (req: FastifyRequest, reply: FastifyReply) => {
     reply.code(404).send('not found this user id');
   }
 };
-
+/**
+ * Deletes existing user
+ * @param req 
+ * @param reply 
+ * returns text deleted
+ */
 const userDelete = (req: FastifyRequest, reply: FastifyReply) => {
   const { id } = req.params as { id: string }
   usersService.deleteUser(id);
@@ -38,7 +51,12 @@ const userDelete = (req: FastifyRequest, reply: FastifyReply) => {
   reply.code(200);
   reply.send('deleted');
 };
-
+/**
+ * Creates new user
+ * @param req 
+ * @param reply 
+ * @returns new created user
+ */
 const userPost = async (req: FastifyRequest, reply: FastifyReply) => {
   const users = userService.getAll();
 
@@ -67,7 +85,13 @@ const userPost = async (req: FastifyRequest, reply: FastifyReply) => {
     reply.send();
   
 };
-
+/**
+ * Modifies existing user data
+ * @param req 
+ * @param reply 
+ * takes id from req.params
+ * @returns modifies user | text cannot find this user
+ */
 const userPut = (req: FastifyRequest, reply: FastifyReply) => {
   const { id } = req.params as { id: string };
 
