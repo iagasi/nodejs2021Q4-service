@@ -7,7 +7,7 @@ const boardRouter=async(fastify:FastifyInstance,)=>{
 
 
 /**
- * @returns   .code(200) .send(All boards from db) @type {Array}
+ * @returns   .code(200) .send(All boards from db) @type {Array<objects>}
   
  */
 fastify.get(routes.boards.getAll,(req:FastifyRequest,reply:FastifyReply)=>{

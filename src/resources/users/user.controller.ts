@@ -60,6 +60,7 @@ const userDelete = (req: FastifyRequest, reply: FastifyReply) => {
 const userPost = async (req: FastifyRequest, reply: FastifyReply) => {
   const users = userService.getAll();
 
+
   let options;
   if (typeof req.body === 'string') {
     options = JSON.parse(req.body);
