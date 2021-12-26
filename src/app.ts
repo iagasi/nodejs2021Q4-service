@@ -9,7 +9,9 @@ import LoggerandErrorHandler from "./Logging&ErrorHandling/ErrorHandler";
 
 
 const app= fastify();
-// const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
+/** ERROR an LOGGING Handler
+ * @params app instance of fastify
+ */
 LoggerandErrorHandler(app)
 
 
@@ -17,7 +19,7 @@ LoggerandErrorHandler(app)
 app.register(boardrouter)
 app.register( userRouter);
 app.register(taskRouter)
-//throw new Error("aaaaaaaaaaaaaa")
+//throw new Error("Error ocuured")
  //Promise.reject(Error('Oops!'));
 
 
