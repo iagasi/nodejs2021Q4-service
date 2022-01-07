@@ -22,6 +22,6 @@ app.register(task_router_1.default);
 //throw new Error("Error ocuured")
 //Promise.reject(Error('Oops!'));
 app.get('/', (_, reply) => {
-    reply.send("Service working");
+    reply.send("Service working!");
 });
 exports.default = app;

@@ -7,8 +7,12 @@ services:
       args:
         - PG_BD_NAME=${PG_BD_NAME}
         - PG_PASSWORD=${PG_PASSWORD}
+
+    volumes:
+     - ./postgressData:/var/lib/postgresql/data    
     ports:
       - "5432:5432"
+    restart: always
   app:   
    
     build:
@@ -18,6 +22,7 @@ services:
       - "4000:4000" 
     volumes:
       -  ./ts-compile:/app/ts-compile
+    
     restart: always
     links:
      - db-postgres  
