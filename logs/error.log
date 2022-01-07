@@ -1,0 +1,14 @@
+{"level":"error","message":"Postgres package has not been found installed. Try to install it: npm install pg --save"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:5432"}
+{"level":"error","message":"database \"test\" does not exist"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:5432"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:5432"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:5432"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:5432"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:5432"}
+{"level":"error","message":"getaddrinfo ENOTFOUND db-postgres"}
+{"level":"error","message":"getaddrinfo ENOTFOUND db-postgres"}
+{"level":"error","message":"getaddrinfo ENOTFOUND db-postgres"}
+{"level":"error","message":"getaddrinfo ENOTFOUND db-postgres"}
+{"level":"error","message":"getaddrinfo ENOTFOUND db-postgres"}
+{"level":"error","message":"getaddrinfo ENOTFOUND db-"}
