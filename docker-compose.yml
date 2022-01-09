@@ -1,18 +1,22 @@
 version: "3"
 services:
   db-postgres:
+
     build:
       context: .
       dockerfile: Dockerfile-db
       args:
         - PG_BD_NAME=${PG_BD_NAME}
         - PG_PASSWORD=${PG_PASSWORD}
-
-    volumes:
-     - ./postgressData:/var/lib/postgresql/data    
     ports:
       - "5432:5432"
-    restart: always
+    
+    volumes:
+     - ./postgressData:/var/lib/postgresql/data
+    
+    restart: on-failure
+    networks:
+      - backend
   app:   
    
     build:
@@ -23,18 +27,22 @@ services:
     volumes:
       -  ./ts-compile:/app/ts-compile
     
-    restart: always
-    links:
+    restart: on-failure 
+    depends_on:
      - db-postgres  
-     
+    networks:
+      - backend
 
-  # nginx:
-  #  image:  nginx:1.17.2-alpine
-  #  container_name: nginx
-  #  volumes:
-  #    - ./default.conf:/etc/nginx/conf.d/default.conf
-  #  links:
-  #   - app
 
-  #  ports:  
-  #   - "8989:8989"
+      
+networks:
+  backend:
+    driver: macvlan
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+        - subnet: "192.168.0.0/24"
+          ip_range: "192.168.0.64/26"
+          gateway: "192.168.0.1"
+ 

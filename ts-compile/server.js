@@ -20,8 +20,12 @@ const start = async () => {
         database: "test",
         entities: [Client_1.User, Banker_1.Banker, Transaction_1.Transaction]
     });
-    await connection.synchronize().then(() => { console.log("connected to db"); });
-    app_1.default.listen(PORT, "0.0.0.0", () => console.log(`App is running on http://localhost:${PORT}`));
+    try {
+        await connection.synchronize().then(() => { console.log("Connected To db"); });
+    }
+    catch (error) {
+    }
+    app_1.default.listen(PORT, "0.0.0.0", () => console.log(`App Is running on http://localhost:${PORT}`));
     const user = Client_1.User.create({
         name: "aaaa",
         last_name: "lastname",

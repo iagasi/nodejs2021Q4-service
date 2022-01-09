@@ -12,7 +12,7 @@
     "prod": "node ./dist/server.js",
     "start": "nodemon -L ./ts-compile/server.js",
     "nodemon": "nodemon",
-    "docker-dev":"tsc --watch",
+    "docker-dev": "tsc --watch",
     "lint": "eslint --ext .js,.ts --fix src/",
     "test": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace --runInBand",
     "test:auth": "cross-env DEBUG=rs:* TEST_MODE=auth jest --noStackTrace"
@@ -54,6 +54,7 @@
     "fastify-serve-swagger-ui": "^1.0.0",
     "fastify-swagger": "^4.12.6",
     "nodemon": "^2.0.15",
+    "npm": "^8.3.0",
     "pg": "^8.7.1",
     "pino": "^7.0.0-rc.9",
     "swagger-ui-express": "4.1.6",
