@@ -25,7 +25,7 @@ app.register(taskRouter)
 
 app.get('/', (_, reply:FastifyReply) => {
  
-    reply.send("Service working");
+    reply.send("Service working!");
     
 
   

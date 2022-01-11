@@ -1,0 +1,48 @@
+version: "3"
+services:
+  db-postgres:
+
+    build:
+      context: .
+      dockerfile: Dockerfile-db
+      args:
+        - PG_BD_NAME=${PG_BD_NAME}
+        - PG_PASSWORD=${PG_PASSWORD}
+    ports:
+      - "5432:5432"
+    
+    volumes:
+     - ./postgressData:/var/lib/postgresql/data
+    
+    restart: on-failure
+    networks:
+      - backend
+  app:   
+   
+    build:
+     context: .
+     dockerfile: Dockerfile
+    ports:
+      - "4000:4000" 
+    volumes:
+      -  ./ts-compile:/app/ts-compile
+    
+    restart: on-failure 
+    depends_on:
+     - db-postgres  
+    networks:
+      - backend
+
+
+      
+networks:
+  backend:
+    driver: macvlan
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+        - subnet: "192.168.0.0/24"
+          ip_range: "192.168.0.64/26"
+          gateway: "192.168.0.1"
+ 
