@@ -1,72 +1,22 @@
-# RS School REST service
+link to taskl:
+https://github.com/rolling-scopes-school/basic-nodejs-course/blob/master/cross-check/docker-basics.md
 
-## Prerequisites
+date of deadline: 10.01.2022
+date submit: 9.01.2022
 
-- Git - [Download & Install Git](https://git-scm.com/downloads).
-- Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+Чтобы запустить приложение запустите-
+docker-compose up потом npm run docker-dev
 
-## Downloading
+score maybe 130
+1 For service start write in console .... docker-compose up .... await APP and DbPostgress start .then write in console ....npm run docker-dev...... Now if you make changes in ./src folder App container can restart with changes.
+Database container delays a bit because of ....volumes... in docker -compose.yaml
+2 If you want to test container auto reload on failure goto ...Dockerfile... and change CMD["npm", "start"] on CMD [ "node","ts-compile/server.js" ] .then rebuild image of App. Nodemon not allows container reload on failure
 
-```
-git clone {repository URL}
-```
+ok Наличие в Readme.md секции с инструкцией как запустить приложение плюс 20 баллов
+ok Используется user-defined bridge плюс 30 баллов///// ...docker-compose.yaml network .... section//
+ok При возникновении ошибки контейнер должен перезапускается автоматически плюс 30 баллов /// goto----- ...Dockerfile... and change CMD["npm", "start"] on CMD [ "node","ts-compile/server.js" ] .then rebuild image of App. NODEMON not allows container reload on failure/// --Maybe it is partial implementation of requrement
 
-## Installing NPM modules
+ok Логи и файлы базы данных хранятся в volumes, а не в контейнере плюс 30 баллов ./postgressData
+ok Итоговый docker-образ с приложением имеет размер меньше 300 мб плюс 20 баллов
 
-```
-npm install
-```
-
-## Running application
-
-```
-npm start
-```
-
-After starting the app on port (4000 as default) you can open
-in your browser OpenAPI documentation by typing http://localhost:4000/doc/.
-For more information about OpenAPI/Swagger please visit https://swagger.io/.
-
-## Testing
-
-After application running open new terminal and enter:
-
-To run all tests without authorization
-
-```
-npm test
-```
-
-To run only one of all test suites (users, boards or tasks)
-
-```
-npm test <suite name>
-```
-
-To run all test with authorization
-
-```
-npm run test:auth
-```
-
-To run only specific test suite with authorization (users, boards or tasks)
-
-```
-npm run test:auth <suite name>
-```
-
-## Development
-
-If you're using VSCode, you can get a better developer experience from integration with [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extensions.
-
-### Auto-fix and format
-
-```
-npm run lint
-```
-
-### Debugging in VSCode
-
-Press <kbd>F5</kbd> to debug.
-
-For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+Штрафы:0
