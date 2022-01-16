@@ -8,23 +8,15 @@ import { User_db } from './entities/User_db';
 export const connectToDb=async()=>{
 
 
+const connection = await createConnection()
 
 
-
-   const connection = await createConnection({
-    type: "postgres",
-    host: "db-postgres",
-    port: 5432,
-    username: "postgres",
-    password: "docker",
-    database: "test",
-    entities: [User_db,Board_db,Tasks_db,Columns_db]
-
-  })
+   
 try {
-  await connection.synchronize().then(() => { console.log("Connected To db"); })
+  await connection.runMigrations().then(() => { console.log("Connected To db"); })
 }
 catch (error) {
+console.log(error);
 
 }
 

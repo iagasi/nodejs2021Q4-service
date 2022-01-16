@@ -3,11 +3,15 @@
     "host": "localhost",
     "port": 5432,
     "username": "postgres",
-   " password": "docker",
-   " database": "test",
-    "entities": ["./database/entities/*"],
-    "migrations":["migrations/*.ts"],
+   "password": "docker",
+   "database": "test",
+   "syncronize":false,
+    "entities": ["./src/database/entities/*{.js,.ts}"],
+    "migrations":["migration/*.{.js,.ts}"],
+    "subscribers": [
+        "src/subscriber/**/*{.js,.ts}"
+     ],
     "cli": {
-        "migrationsDir": "migrations"
+        "migrationsDir": "migration"
     }
 }

@@ -10,6 +10,7 @@ export class Board_db extends BaseEntity {
     id: string;
 
     @Column()
+    
     title: string;
 
   

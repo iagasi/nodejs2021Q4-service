@@ -53,7 +53,7 @@ const createNewBoard = async (board: IBoard) => {
  * @param {{id:string ,title:string,columns:Array<string>}}options
  * @returns  found  boarts @type {IBoard}
  */
-const modifyBoard = async (id: string, options: IBoard) => {
+const modifyBoard = async (id: any, options: IBoard) => {
   const board1=await Board_db.findOne(id)
  await Board_db.update({id:id},{title:options.title})
   const columns1=await Columns_db.find({board:id})
@@ -96,7 +96,7 @@ const candidate=await Board_db.findOne(id)
 
 
  if(candidate){ 
-   const {id}=candidate as {id:string}
+   const {id}=candidate as {id:any}
    await Tasks_db.delete({boardId:id})
    await Columns_db.delete({board:id})
   await Board_db.delete({ id: id });
