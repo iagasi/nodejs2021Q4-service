@@ -12,7 +12,7 @@ const app= fastify();
 /** ERROR an LOGGING Handler
  * @params app instance of fastify
  */
-LoggerandErrorHandler(app)
+//LoggerandErrorHandler(app)
 
 
 

@@ -9,41 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Banker = void 0;
+exports.Columns_db = void 0;
 const typeorm_1 = require("typeorm");
-const Client_1 = require("./Client");
-let Banker = class Banker extends Client_1.User {
+const Board_db_1 = require("./Board_db");
+let Columns_db = class Columns_db extends typeorm_1.BaseEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
-    __metadata("design:type", Number)
-], Banker.prototype, "id", void 0);
+    __metadata("design:type", String)
+], Columns_db.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Banker.prototype, "email", void 0);
+], Columns_db.prototype, "title", void 0);
 __decorate([
-    (0, typeorm_1.Column)({
-        unique: true
-    }),
-    __metadata("design:type", Number)
-], Banker.prototype, "employenumber", void 0);
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Columns_db.prototype, "order", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => Client_1.User),
-    (0, typeorm_1.JoinTable)({
-        name: "banker_and_client",
-        joinColumn: {
-            name: "banker",
-            referencedColumnName: "id"
-        },
-        inverseJoinColumn: {
-            name: "user",
-            referencedColumnName: "id"
-        }
-    }),
-    __metadata("design:type", Array)
-], Banker.prototype, "clients", void 0);
-Banker = __decorate([
+    (0, typeorm_1.ManyToOne)(() => Board_db_1.Board_db, board => board.columns),
+    __metadata("design:type", Board_db_1.Board_db)
+], Columns_db.prototype, "board", void 0);
+Columns_db = __decorate([
     (0, typeorm_1.Entity)()
-], Banker);
-exports.Banker = Banker;
+], Columns_db);
+exports.Columns_db = Columns_db;
+//# sourceMappingURL=Columns_db.js.map

@@ -23,3 +23,4 @@ module.exports = {
     },
     login: '/login'
 };
+//# sourceMappingURL=lib.js.map

@@ -3,10 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var config_1 = __importDefault(require("./common/config"));
-var app_1 = __importDefault(require("./app"));
-var PORT = config_1.default.PORT || 4000;
-app_1.default.listen(PORT, function () {
-    return console.log("App is running on http://localhost:".concat(PORT));
-});
-//module.exports=app
+const config_1 = __importDefault(require("./common/config"));
+const app_1 = __importDefault(require("./app"));
+const database_1 = require("./database");
+const PORT = config_1.default.PORT || 4000;
+const start = async () => {
+    await (0, database_1.connectToDb)();
+    app_1.default.listen(PORT, "0.0.0.0", () => console.log(`App Is running on http://localhost:${PORT}`));
+};
+start();
+exports.default = app_1.default;
+//# sourceMappingURL=server.js.map

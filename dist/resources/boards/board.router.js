@@ -1,26 +1,26 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var controller = require("./board.controller");
-var routes = require("../lib");
-var boardRouter = function (fastify, options, done) {
-    fastify.get(routes.boards.getAll, function (req, reply) {
-        var getAllBoards = controller.getAll();
-        reply
-            .code(200)
-            .send(getAllBoards);
+const board_controller_1 = __importDefault(require("./board.controller"));
+const lib_1 = __importDefault(require("../lib"));
+const boardRouter = async (fastify) => {
+    fastify.get(lib_1.default.boards.getAll, (req, reply) => {
+        board_controller_1.default.getAll(req, reply);
     });
-    fastify.get(routes.boards.getById(":id"), function (req, reply) {
-        controller.getById(req, reply);
+    fastify.get(lib_1.default.boards.getById(":id"), (req, reply) => {
+        board_controller_1.default.getById(req, reply);
     });
-    fastify.post(routes.boards.create, function (req, reply) {
-        controller.createBoard(req, reply);
+    fastify.post(lib_1.default.boards.create, (req, reply) => {
+        board_controller_1.default.createBoard(req, reply);
     });
-    fastify.put(routes.boards.update(":id"), function (req, reply) {
-        controller.modifyBoard(req, reply);
+    fastify.put(lib_1.default.boards.update(":id"), (req, reply) => {
+        board_controller_1.default.modifyBoard(req, reply);
     });
-    fastify.delete(routes.boards.delete(":id"), function (req, reply) {
-        controller.deleteBoard(req, reply);
+    fastify.delete(lib_1.default.boards.delete(":id"), (req, reply) => {
+        board_controller_1.default.deleteBoard(req, reply);
     });
-    done();
 };
 exports.default = boardRouter;
+//# sourceMappingURL=board.router.js.map

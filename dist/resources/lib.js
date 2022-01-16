@@ -2,24 +2,25 @@
 module.exports = {
     users: {
         getAll: '/users',
-        getById: function (id) { return "/users/".concat(id); },
+        getById: (id) => `/users/${id}`,
         create: '/users',
-        update: function (id) { return "/users/".concat(id); },
-        delete: function (id) { return "/users/".concat(id); }
+        update: (id) => `/users/${id}`,
+        delete: (id) => `/users/${id}`
     },
     tasks: {
-        getAll: function (boardId) { return "/boards/".concat(boardId, "/tasks"); },
-        getById: function (boardId, taskId) { return "/boards/".concat(boardId, "/tasks/").concat(taskId); },
-        create: function (boardId) { return "/boards/".concat(boardId, "/tasks"); },
-        update: function (boardId, taskId) { return "/boards/".concat(boardId, "/tasks/").concat(taskId); },
-        delete: function (boardId, taskId) { return "/boards/".concat(boardId, "/tasks/").concat(taskId); }
+        getAll: (boardId) => `/boards/${boardId}/tasks`,
+        getById: (boardId, taskId) => `/boards/${boardId}/tasks/${taskId}`,
+        create: (boardId) => `/boards/${boardId}/tasks`,
+        update: (boardId, taskId) => `/boards/${boardId}/tasks/${taskId}`,
+        delete: (boardId, taskId) => `/boards/${boardId}/tasks/${taskId}`
     },
     boards: {
         getAll: '/boards',
-        getById: function (id) { return "/boards/".concat(id); },
+        getById: (id) => `/boards/${id}`,
         create: '/boards',
-        update: function (id) { return "/boards/".concat(id); },
-        delete: function (id) { return "/boards/".concat(id); }
+        update: (id) => `/boards/${id}`,
+        delete: (id) => `/boards/${id}`
     },
     login: '/login'
 };
+//# sourceMappingURL=lib.js.map

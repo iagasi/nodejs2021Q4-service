@@ -2,13 +2,13 @@ interface IBoard {
     
 id:string
 title:string
-columns:Array <object>
+columns:Array<{title:string,order:number}>
     }
     
 interface IReceivedRequestBody{
     id:string|undefined
     title:string
-    columns:Array <object>
+    columns:Array<{title:string,order:number}>
 }
    
 
