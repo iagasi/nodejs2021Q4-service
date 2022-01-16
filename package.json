@@ -10,7 +10,7 @@
   "main": "src/server.js",
   "scripts": {
     "prod": "node ./dist/server.js",
-    "start": "nodemon -L ./ts-compile/server.js",
+    "start": "nodemon --exitcrash -L ./ts-compile/server.js",
     "nodemon": "nodemon",
     "docker-dev": "tsc --watch",
     "lint": "eslint --ext .js,.ts --fix src/",
