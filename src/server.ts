@@ -11,7 +11,7 @@ const start = async () => {
  
   await  connectToDb()
   app.listen(PORT, "0.0.0.0", () =>
-    console.log(`App Is running on http://localhost:${PORT}`)
+    console.log(`App1 Is running on http://localhost:${PORT}`)
   );
 
 
