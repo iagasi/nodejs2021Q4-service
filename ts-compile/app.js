@@ -12,7 +12,7 @@ app.register(board_router_1.default);
 app.register(user_router_1.default);
 app.register(task_router_1.default);
 app.get('/', (_, reply) => {
-    reply.send("Service working!");
+    reply.send("Service workin");
 });
 exports.default = app;
 //# sourceMappingURL=app.js.map

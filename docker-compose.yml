@@ -11,10 +11,10 @@ services:
     ports:
       - "5432:5432"
     
-    volumes:
-     - ./postgressData:/var/lib/postgresql/data
+    # volumes:
+    #  - ./postgressData:/var/lib/postgresql/data
     
-    restart: always
+    restart: on-failure
     networks:
       - backend
   app:   
@@ -27,7 +27,7 @@ services:
     volumes:
       -  ./ts-compile:/app/ts-compile
     
-    restart: always 
+    restart: on-failure 
     depends_on:
      - db-postgres  
     networks:
@@ -45,3 +45,5 @@ networks:
         - subnet: "192.168.0.0/24"
           ip_range: "192.168.0.64/26"
           gateway: "192.168.0.1"
+          
+ 

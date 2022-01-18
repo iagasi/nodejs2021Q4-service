@@ -10,9 +10,10 @@ COPY ./ts-compile ./ts-compile
 
 
 FROM node:16-alpine
-COPY --from=build  ./app/ts-compile /app/ts-compile
+COPY --from=build  ./app/ts-compile/ /app/
 COPY --from=build ./app/node_modules  /app/node_modules
  COPY  --from=build ./app/package*.json  /app
+COPY ./ormconfig.json /app/
 WORKDIR /app
  CMD ["npm","start"]
 

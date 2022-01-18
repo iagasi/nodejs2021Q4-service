@@ -5,31 +5,28 @@ import fastify,{ FastifyReply,FastifyPluginCallback} from "fastify"
 import userRouter from './resources/users/user.router';
 import taskRouter from "./resources/tasks/task.router";
 import boardrouter from "./resources/boards/board.router"
-
 import LoggerandErrorHandler from "./Logging&ErrorHandling/ErrorHandler";
-import regRouter from "./resources/authorization/index";
+//import { registracion } from "./resources/registracion/regIndex";
 
 
-
-const app= fastify();
+const app= fastify();//
 /** ERROR an LOGGING Handler
  * @params app instance of fastify
  */
 //LoggerandErrorHandler(app)
-regRouter(app)
-app.register(regRouter)
 
+
+//app.register(registracion)
 app.register(boardrouter)
 app.register( userRouter);
 app.register(taskRouter)
-
 //throw new Error("Error ocuured")
  //Promise.reject(Error('Oops!'));
 
 
 app.get('/', (_, reply:FastifyReply) => {
  
-    reply.send("servece vvvvvvvvvvvvvvvvvv");
+    reply.send("Service workin");
     
 
   
