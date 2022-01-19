@@ -9,32 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.Board_db = void 0;
 const typeorm_1 = require("typeorm");
-const Transaction_1 = require("./Transaction");
-let User = class User extends typeorm_1.BaseEntity {
+const Columns_db_1 = require("./Columns_db");
+let Board_db = class Board_db extends typeorm_1.BaseEntity {
 };
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
-    __metadata("design:type", Number)
-], User.prototype, "id", void 0);
+    (0, typeorm_1.PrimaryColumn)(),
+    __metadata("design:type", String)
+], Board_db.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], User.prototype, "name", void 0);
+], Board_db.prototype, "title", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], User.prototype, "last_name", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
-], User.prototype, "balance", void 0);
-__decorate([
-    (0, typeorm_1.OneToMany)(() => Transaction_1.Transaction, transaction => transaction.user),
+    (0, typeorm_1.Column)({}),
+    (0, typeorm_1.OneToMany)(() => Columns_db_1.Columns_db, columns_db => columns_db.board),
     __metadata("design:type", Array)
-], User.prototype, "transactions", void 0);
-User = __decorate([
+], Board_db.prototype, "columns", void 0);
+Board_db = __decorate([
     (0, typeorm_1.Entity)()
-], User);
-exports.User = User;
+], Board_db);
+exports.Board_db = Board_db;
+//# sourceMappingURL=Board_db.js.map

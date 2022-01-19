@@ -10,12 +10,14 @@
   "main": "src/server.js",
   "scripts": {
     "prod": "node ./dist/server.js",
-    "start": "nodemon -L ./ts-compile/server.js",
+    "start": "nodemon --exitcrash -L ./ts-compile/server.js",
     "nodemon": "nodemon",
     "docker-dev": "tsc --watch",
     "lint": "eslint --ext .js,.ts --fix src/",
     "test": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace --runInBand",
-    "test:auth": "cross-env DEBUG=rs:* TEST_MODE=auth jest --noStackTrace"
+    "test:auth": "cross-env DEBUG=rs:* TEST_MODE=auth jest --noStackTrace",
+    "generate": "ts-node ./node_modules/typeorm/cli.js migration:generate -n migrationame -p"
+ 
   },
   "keywords": [
     "rs",

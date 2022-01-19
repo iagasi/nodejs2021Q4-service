@@ -13,7 +13,7 @@ import { IBoard, IReceivedRequestBody } from "./interfaces";
 const boardModel = (options: IReceivedRequestBody) => {
     
     const { id, title, columns, } = options
-    if (!title || !columns || !Array.isArray(columns)) { return ("Error required options missinsg"); }
+   
 
     const generatedBoard: IBoard = {
         id: id || uuidv4(),

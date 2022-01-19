@@ -1,54 +1,84 @@
-import { IBoard } from "./interfaces"
+import { title } from 'process';
+import { Tasks_db } from '../../database/entities/Tasks_db';
+import { FindCondition, getManager } from 'typeorm';
+import { Board_db } from '../../database/entities/Board_db';
+import { Columns_db } from '../../database/entities/Columns_db';
+import { mergeBoardsColumns } from './functions/mergeBoards.Columns';
+import { IBoard } from './interfaces';
 
-
-
-const boards:Array<IBoard>=[]
+const boards: Array<IBoard> = [];
 /**
- * 
+ *
  * @returns ALL Boards
  *  @type {Array<object>}
  */
-const getAll=():Array<IBoard>=>boards
-
+const getAll = async () => {
+  return await Board_db.find();
+};
 
 /**
  * @params id @type {string}
  * @returns found Board in array @type {object}
  */
-const getById=(id:string)=>{
-  const foundBoard=boards.find((board:IBoard)=>board.id===id)
- return foundBoard
-}
+const getById = async (id: string) => {
+  const foundBoard = await Board_db.findOne(id);
+  return foundBoard;
+};
 
 /**
  * Creates New Board In Array
- * @param {id:string ,title:string,columns:Array<string>}  board 
+ * @param {id:string ,title:string,columns:Array<string>}  board
  * @returns {void}
- * 
+ *
  */
-const createBoard=(board:IBoard)=>{
-boards.push(board)
-}
+const createNewBoard = async (board: IBoard) => {
+    
+  const newboard = Board_db.create(board);
+  await newboard.save()
+  const columns=board.columns
+   for await ( const  iterator of columns) {
+    const column=Columns_db.create({ title:iterator.title,order:iterator.order,board:newboard})
+    await column.save()
+ }
+
+    
+    return {...newboard,columns}
+   
+  
+  
+};
 /**
  * Modifies existing Board by id id remains ame
- * @param {string} id 
- * @param {{id:string ,title:string,columns:Array<string>}}options 
+ * @param {string} id
+ * @param {{id:string ,title:string,columns:Array<string>}}options
  * @returns  found  boarts @type {IBoard}
  */
-const modifyBoard=(id:string,options:IBoard)=>{
+const modifyBoard = async (id: any, options: IBoard) => {
+//   const board1=await Board_db.findOne(id)
+//  await Board_db.update({id:id},{title:options.title})
+//   const columns1=await Columns_db.find({board:id})
+//   await Columns_db.remove(columns1)
+//   const columns2=await Columns_db.find({board:id})
   
- let foundBoardIndex:number|undefined
-boards.find((board,index)=>{
-  if (board.id.toString()===id){foundBoardIndex= index ;return}
- return foundBoardIndex
-})
+  
+//   for await (const iterator of options.columns) {
 
-if(foundBoardIndex||foundBoardIndex===0){
-  boards[foundBoardIndex].title=options.title
-  boards[foundBoardIndex].columns=options.columns
-}
-else{return undefined}
-}
+
+//    const create= Columns_db.create({title:iterator.title,order:iterator.order,board:board1})
+//   await create.save()
+ 
+//   }
+  
+//    const board=await Board_db.findOne(id)
+  
+   
+//   const boardColumns=await Columns_db.find({board:board1.id})
+ 
+ 
+ 
+//  return mergeBoardsColumns(board,boardColumns)
+ return {}
+};
 
 /**
  * Delete board by id
@@ -58,19 +88,25 @@ else{return undefined}
  * or
  * @returns {undefined}
  */
-const deleteBoard=(id:string)=>{
-  let deletedUser:IBoard|undefined
- 
-boards.forEach((element,index) => {
-  if(element.id===id){boards.splice(index,1)
-    deletedUser=element
-  }
-
-  else{deletedUser=undefined}
-});
-  return deletedUser
-
-  }
+const deleteBoard = async (id: string) => {
 
 
-export default{getAll,getById,createBoard,modifyBoard,deleteBoard}
+
+const candidate=await Board_db.findOne(id)
+
+
+ if(candidate){ 
+   const {id}=candidate as {id:any}
+   await Tasks_db.delete({boardId:id})
+   await Columns_db.delete({board:id})
+  await Board_db.delete({ id: id });
+return candidate
+}
+  
+else{return undefined}
+
+return undefined
+
+};
+
+export default { getAll, getById, createNewBoard, modifyBoard, deleteBoard };

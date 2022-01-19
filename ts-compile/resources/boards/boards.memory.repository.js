@@ -1,71 +1,42 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const Tasks_db_1 = require("../../database/entities/Tasks_db");
+const Board_db_1 = require("../../database/entities/Board_db");
+const Columns_db_1 = require("../../database/entities/Columns_db");
 const boards = [];
-/**
- *
- * @returns ALL Boards
- *  @type {Array<object>}
- */
-const getAll = () => boards;
-/**
- * @params id @type {string}
- * @returns found Board in array @type {object}
- */
-const getById = (id) => {
-    const foundBoard = boards.find((board) => board.id === id);
+const getAll = async () => {
+    return await Board_db_1.Board_db.find();
+};
+const getById = async (id) => {
+    const foundBoard = await Board_db_1.Board_db.findOne(id);
     return foundBoard;
 };
-/**
- * Creates New Board In Array
- * @param {id:string ,title:string,columns:Array<string>}  board
- * @returns {void}
- *
- */
-const createBoard = (board) => {
-    boards.push(board);
+const createNewBoard = async (board) => {
+    const newboard = Board_db_1.Board_db.create(board);
+    await newboard.save();
+    const columns = board.columns;
+    for await (const iterator of columns) {
+        const column = Columns_db_1.Columns_db.create({ title: iterator.title, order: iterator.order, board: newboard });
+        await column.save();
+    }
+    return { ...newboard, columns };
 };
-/**
- * Modifies existing Board by id id remains ame
- * @param {string} id
- * @param {{id:string ,title:string,columns:Array<string>}}options
- * @returns  found  boarts @type {IBoard}
- */
-const modifyBoard = (id, options) => {
-    let foundBoardIndex;
-    boards.find((board, index) => {
-        if (board.id.toString() === id) {
-            foundBoardIndex = index;
-            return;
-        }
-        return foundBoardIndex;
-    });
-    if (foundBoardIndex || foundBoardIndex === 0) {
-        boards[foundBoardIndex].title = options.title;
-        boards[foundBoardIndex].columns = options.columns;
+const modifyBoard = async (id, options) => {
+    return {};
+};
+const deleteBoard = async (id) => {
+    const candidate = await Board_db_1.Board_db.findOne(id);
+    if (candidate) {
+        const { id } = candidate;
+        await Tasks_db_1.Tasks_db.delete({ boardId: id });
+        await Columns_db_1.Columns_db.delete({ board: id });
+        await Board_db_1.Board_db.delete({ id: id });
+        return candidate;
     }
     else {
         return undefined;
     }
+    return undefined;
 };
-/**
- * Delete board by id
- * @param id
- * @
- * @returns deleted Board @type {object}
- * or
- * @returns {undefined}
- */
-const deleteBoard = (id) => {
-    let deletedUser;
-    boards.forEach((element, index) => {
-        if (element.id === id) {
-            boards.splice(index, 1);
-            deletedUser = element;
-        }
-        else {
-            deletedUser = undefined;
-        }
-    });
-    return deletedUser;
-};
-exports.default = { getAll, getById, createBoard, modifyBoard, deleteBoard };
+exports.default = { getAll, getById, createNewBoard, modifyBoard, deleteBoard };
+//# sourceMappingURL=boards.memory.repository.js.map

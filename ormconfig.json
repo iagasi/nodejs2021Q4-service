@@ -1,0 +1,22 @@
+
+
+
+{
+    "type":"postgres",
+    "host":"db-postgres",
+    "port":5432,
+    "username":"postgres",
+   "password":"docker",
+   "database":"test",
+   "synchronize":true,
+    "entities":["./ts-compile/database/entities/*.js"],
+    "migrations":["./ts-compile/migration/*.js"],
+    "migrationsRun":true,
+    "subscribers": [
+        "src/subscriber/**/*{.js,.ts}"
+     ],
+    "cli": {
+        "entitiesDir":"./src/database/entities/*{.js,.ts}",
+        "migrationsDir": "migration"
+    }
+}

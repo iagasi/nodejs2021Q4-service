@@ -1,19 +1,35 @@
+import { Tasks_db } from "../../database/entities/Tasks_db";
+import { getConnection, getManager } from "typeorm";
+import { Columns_db } from "../../database/entities/Columns_db";
+import { User_db } from "../../database/entities/User_db";
 import { IUser } from "./interfaces";
+import userService from "./user.service";
+import { taskDelete } from "../tasks/task.memory.repository";
 
-let db: Array<IUser> = [];
+const db: Array<IUser> = [];
 /**
  * 
  * @returns all db @type {Array<IUser>  }
  */
-const getAll = () => db
+const getAll =async () => await User_db.find()
+
+const getById=async(id:string)=>{
+  const user=await User_db.findOne(id)
+return user
+}
+
 
 
 /**
  * Pushes new user to Db
- * @param data 
+ * @param data_of_User
  *
  */
-const create = (data: IUser) => db.push(data)
+const create = async(data_of_User: IUser) => {
+  const newUser=User_db.create(data_of_User)
+  await newUser.save()
+  return newUser
+}
 
 
 
@@ -24,35 +40,30 @@ const create = (data: IUser) => db.push(data)
  * @param options 
  * @returns modified user || undefined
  */
-const modify = (id: string, options: IUser) => {
-  const index = db.findIndex(user => user.id===id );
-  
-
-
-if(index!==-1)
-{
-  if (options.name) {
-    db[index].name = options.name;
-  }
-  if (options.password) {
-    db[index].password = options.password;
-  }
-  if (options.login) {
-    db[index].login = options.login;
-  }
-   return db[index]
-}
+const modify = async(id: string, options: IUser) => {
+const user= await  User_db.update({id:id},options)
+ return await User_db.findOneOrFail(id)
 }
 /**
  * Deletes existing user By id
  * @param id 
  */
-const deleteUser = (id: string) => {
-  db = db.filter(user => user.id !== id)
-
+const deleteUser = async(id: string) => {
+ 
+// const task=await Tasks_db.findOne({userId:id})
+//   await getConnection()
+//   .createQueryBuilder()
+//   .update(Tasks_db)
+//   .set({ userId: null})
+//   .where("userId = :id", { id: id })
+//   .execute();
+await Tasks_db.update({userId:id},{userId:null})
+  await User_db.delete({id:id})
+const y= await Tasks_db.findOne({id:id})
+return y
 }
 
 
-export = { getAll, create, modify, deleteUser };
+export = { getAll, create, modify, deleteUser ,getById};
 
 

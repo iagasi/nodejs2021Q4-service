@@ -6,16 +6,17 @@ import userRouter from './resources/users/user.router';
 import taskRouter from "./resources/tasks/task.router";
 import boardrouter from "./resources/boards/board.router"
 import LoggerandErrorHandler from "./Logging&ErrorHandling/ErrorHandler";
+//import { registracion } from "./resources/registracion/regIndex";
 
 
-const app= fastify();
+const app= fastify();//
 /** ERROR an LOGGING Handler
  * @params app instance of fastify
  */
-LoggerandErrorHandler(app)
+//LoggerandErrorHandler(app)
 
 
-
+//app.register(registracion)
 app.register(boardrouter)
 app.register( userRouter);
 app.register(taskRouter)
@@ -25,7 +26,7 @@ app.register(taskRouter)
 
 app.get('/', (_, reply:FastifyReply) => {
  
-    reply.send("Service working!");
+    reply.send("Service workin");
     
 
   

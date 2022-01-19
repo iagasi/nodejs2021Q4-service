@@ -7,14 +7,15 @@ import usersService from './user.service';
 
 import unasighnUser from "../tasks/task.controller"
 
+
 /**
  *
  * @param req -null
  * @param reply
  * @returns reply.send(200) @type { Array<object>}  without password
  */
-const getAll = (req: FastifyRequest, reply: FastifyReply) => {
-  const users = usersService.getAll();
+const getAll = async (req: FastifyRequest, reply: FastifyReply) => {
+  const users = await usersService.getAll();
   reply.code(200);
   reply.send(users.map((concreteUser: IUser) => User.toResponse(concreteUser)));
 };
@@ -27,9 +28,9 @@ const getAll = (req: FastifyRequest, reply: FastifyReply) => {
   * 
   */
 const getById = async (req: FastifyRequest, reply: FastifyReply) => {
-  const users = usersService.getAll();
+
   const { id } = req.params as { id: string };
-  const foundUser = users.find((user) => user.id === id);
+  const foundUser = await userService.getById(id)
 
   if (foundUser !== undefined) {
     const modifiedUser = User.toResponse(foundUser);
@@ -44,12 +45,15 @@ const getById = async (req: FastifyRequest, reply: FastifyReply) => {
  * @param reply 
  * returns text deleted
  */
-const userDelete = (req: FastifyRequest, reply: FastifyReply) => {
+const userDelete =async (req: FastifyRequest, reply: FastifyReply) => {
+
   const { id } = req.params as { id: string }
-  usersService.deleteUser(id);
-  unasighnUser.unasighnUser(id)
+ const unasighned= await usersService.deleteUser(id);
+ 
+
+  
   reply.code(200);
-  reply.send('deleted');
+  reply.send({...unasighned});
 };
 /**
  * Creates new user
@@ -58,8 +62,6 @@ const userDelete = (req: FastifyRequest, reply: FastifyReply) => {
  * @returns new created user
  */
 const userPost = async (req: FastifyRequest, reply: FastifyReply) => {
-  const users = userService.getAll();
-
 
   let options;
   if (typeof req.body === 'string') {
@@ -70,10 +72,11 @@ const userPost = async (req: FastifyRequest, reply: FastifyReply) => {
   const { name, login, password } = options as ReqBody;
 
   const newUser: IUser = new User({ name, login, password });
-  const { id } = newUser;
-  usersService.create({ ...newUser });
+  
+ const newCreatedUser= await usersService.create(newUser);
 
-  const newCreatedUser = users.find((user) => user.id === id);
+
+ // const newCreatedUser = users.find((user) => user.id === id);
 
   if (newCreatedUser) {
     const modificietUserForFesponse = User.toResponse(newCreatedUser);
@@ -93,15 +96,15 @@ const userPost = async (req: FastifyRequest, reply: FastifyReply) => {
  * takes id from req.params
  * @returns modifies user | text cannot find this user
  */
-const userPut = (req: FastifyRequest, reply: FastifyReply) => {
+const userPut = async(req: FastifyRequest, reply: FastifyReply) => {
   const { id } = req.params as { id: string };
 
-  const modifiedUser = usersService.modify(id, req.body as IUser);
+  const modifiedUser = await usersService.modify(id, req.body as IUser);
 
   if (modifiedUser) {
-    const modForReply = User.toResponse(modifiedUser);
+    const modForReply =  User.toResponse(modifiedUser);
 
-    reply.header('Content-Type', 'application/json').send({ ...modifiedUser });
+    reply.header('Content-Type', 'application/json').send({ ...modForReply });
   } else {
     reply
       .code(404)
