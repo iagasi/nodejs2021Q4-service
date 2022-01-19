@@ -1,6 +1,6 @@
 import { title } from 'process';
 import { Tasks_db } from '../../database/entities/Tasks_db';
-import { getManager } from 'typeorm';
+import { FindCondition, getManager } from 'typeorm';
 import { Board_db } from '../../database/entities/Board_db';
 import { Columns_db } from '../../database/entities/Columns_db';
 import { mergeBoardsColumns } from './functions/mergeBoards.Columns';
@@ -54,30 +54,30 @@ const createNewBoard = async (board: IBoard) => {
  * @returns  found  boarts @type {IBoard}
  */
 const modifyBoard = async (id: any, options: IBoard) => {
-  const board1=await Board_db.findOne(id)
- await Board_db.update({id:id},{title:options.title})
-  const columns1=await Columns_db.find({board:id})
-  await Columns_db.remove(columns1)
-  const columns2=await Columns_db.find({board:id})
+//   const board1=await Board_db.findOne(id)
+//  await Board_db.update({id:id},{title:options.title})
+//   const columns1=await Columns_db.find({board:id})
+//   await Columns_db.remove(columns1)
+//   const columns2=await Columns_db.find({board:id})
   
   
-  for await (const iterator of options.columns) {
+//   for await (const iterator of options.columns) {
 
 
-   const create= Columns_db.create({title:iterator.title,order:iterator.order,board:board1})
-  await create.save()
+//    const create= Columns_db.create({title:iterator.title,order:iterator.order,board:board1})
+//   await create.save()
  
-  }
+//   }
   
-   const board=await Board_db.findOne(id)
+//    const board=await Board_db.findOne(id)
   
    
-  const boardColumns=await Columns_db.find({board:board1.id})
+//   const boardColumns=await Columns_db.find({board:board1.id})
  
  
  
- return mergeBoardsColumns(board,boardColumns)
- return
+//  return mergeBoardsColumns(board,boardColumns)
+ return {}
 };
 
 /**
