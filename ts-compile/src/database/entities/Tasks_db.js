@@ -32,23 +32,13 @@ __decorate([
     __metadata("design:type", String)
 ], Tasks_db.prototype, "description", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.ManyToOne)(() => User_db_1.User_db, User_db => User_db.id),
     __metadata("design:type", Object)
 ], Tasks_db.prototype, "userId", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => User_db_1.User_db, User_db => User_db.id),
-    (0, typeorm_1.JoinColumn)({ name: "userId" }),
-    __metadata("design:type", Object)
-], Tasks_db.prototype, "USERID", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.ManyToOne)(() => Board_db_1.Board_db, Board_db => Board_db.id),
     __metadata("design:type", Object)
 ], Tasks_db.prototype, "boardId", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => Board_db_1.Board_db, Board_db => Board_db.id),
-    (0, typeorm_1.JoinColumn)({ name: "boardId" }),
-    __metadata("design:type", Object)
-], Tasks_db.prototype, "BOARDID", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)

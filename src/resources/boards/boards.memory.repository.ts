@@ -54,7 +54,7 @@ const createNewBoard = async (board: IBoard) => {
  * @returns  found  boarts @type {IBoard}
  */
 const modifyBoard = async (id: any, options: IBoard) => {
-//   const board1=await Board_db.findOne(id)
+ //  const board1=await Board_db.findOne(id)
 //  await Board_db.update({id:id},{title:options.title})
 //   const columns1=await Columns_db.find({board:id})
 //   await Columns_db.remove(columns1)
