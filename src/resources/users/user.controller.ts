@@ -15,6 +15,8 @@ import unasighnUser from "../tasks/task.controller"
  * @returns reply.send(200) @type { Array<object>}  without password
  */
 const getAll = async (req: FastifyRequest, reply: FastifyReply) => {
+  
+  
   const users = await usersService.getAll();
   reply.code(200);
   reply.send(users.map((concreteUser: IUser) => User.toResponse(concreteUser)));
