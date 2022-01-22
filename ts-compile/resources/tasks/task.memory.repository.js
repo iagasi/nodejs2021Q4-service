@@ -32,7 +32,6 @@ exports.create = create;
 const update = async (BOARDID, TASKID, title, order, description) => {
     const updated = await Tasks_db_1.Tasks_db.update({ id: TASKID }, { title: title, order: order, description: description });
     const task = await Tasks_db_1.Tasks_db.findOne({ id: TASKID });
-    console.log(task);
     return task;
 };
 exports.update = update;

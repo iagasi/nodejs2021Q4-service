@@ -58,7 +58,7 @@ const update=async (BOARDID:string,TASKID:string,title:string,order:number,descr
 const updated=await Tasks_db.update({id:TASKID},{title:title,order:order,description:description})
 
 const task=await Tasks_db.findOne({id:TASKID})
-console.log(task);
+
 return task
 
 

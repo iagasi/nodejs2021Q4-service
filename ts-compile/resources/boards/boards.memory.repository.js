@@ -1,14 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Tasks_db_1 = require("../../database/entities/Tasks_db");
+const typeorm_1 = require("typeorm");
 const Board_db_1 = require("../../database/entities/Board_db");
 const Columns_db_1 = require("../../database/entities/Columns_db");
 const boards = [];
 const getAll = async () => {
-    return await Board_db_1.Board_db.find();
+    const repo = (0, typeorm_1.getRepository)(Board_db_1.Board_db);
+    const allBoards = await repo.find({ relations: ["columns"] });
+    return allBoards;
 };
 const getById = async (id) => {
-    const foundBoard = await Board_db_1.Board_db.findOne(id);
+    const foundBoard = await Board_db_1.Board_db.findOne(id, { relations: ["columns"] });
+    console.log(foundBoard);
     return foundBoard;
 };
 const createNewBoard = async (board) => {
@@ -22,6 +26,7 @@ const createNewBoard = async (board) => {
     return { ...newboard, columns };
 };
 const modifyBoard = async (id, options) => {
+    await Board_db_1.Board_db.update({ id: id }, { title: options.title });
     return {};
 };
 const deleteBoard = async (id) => {

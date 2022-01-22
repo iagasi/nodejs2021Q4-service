@@ -23,7 +23,7 @@ __decorate([
     __metadata("design:type", String)
 ], Board_db.prototype, "title", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => Columns_db_1.Columns_db, columns => columns.id, { onDelete: 'CASCADE' }),
+    (0, typeorm_1.OneToMany)(() => Columns_db_1.Columns_db, columns => columns.board, { onDelete: 'CASCADE' }),
     __metadata("design:type", Array)
 ], Board_db.prototype, "columns", void 0);
 Board_db = __decorate([
