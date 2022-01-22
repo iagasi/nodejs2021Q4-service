@@ -21,7 +21,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyToken = exports.singhAcessToken = void 0;
 const jwt = __importStar(require("jsonwebtoken"));
-const jwtSecret = "111";
+require('dotenv').config();
+let jwtSecret = process.env.JWT_SECRET_KEY;
 const singhAcessToken = async (userId, login) => {
     const payload = {
         userId: userId,

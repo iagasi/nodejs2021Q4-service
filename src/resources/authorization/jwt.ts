@@ -1,10 +1,10 @@
 import * as jwt from "jsonwebtoken"
-
-const jwtSecret="111"
+require('dotenv').config()
+let jwtSecret=process.env.JWT_SECRET_KEY as string
 
  export  const   singhAcessToken=async(userId:string,login:string)=>{
-
-        const payload={
+   
+          const payload={
             userId:userId,
             login:login
         }
@@ -14,6 +14,8 @@ const jwtSecret="111"
         
        
         })
+    
+     
        
     }
 export const verifyToken=async(token:string)=>{

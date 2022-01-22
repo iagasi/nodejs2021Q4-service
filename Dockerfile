@@ -14,6 +14,7 @@ COPY --from=build  ./app/ts-compile/ /app/
 COPY --from=build ./app/node_modules  /app/node_modules
  COPY  --from=build ./app/package*.json  /app
 COPY ./ormconfig.json /app/
+COPY ./.env /app/
 WORKDIR /app
  CMD ["npm","start"]
 
