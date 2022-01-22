@@ -12,7 +12,6 @@ const getAll = async () => {
 };
 const getById = async (id) => {
     const foundBoard = await Board_db_1.Board_db.findOne(id, { relations: ["columns"] });
-    console.log(foundBoard);
     return foundBoard;
 };
 const createNewBoard = async (board) => {
@@ -34,7 +33,7 @@ const deleteBoard = async (id) => {
     if (candidate) {
         const { id } = candidate;
         await Tasks_db_1.Tasks_db.delete({ boardId: id });
-        await Columns_db_1.Columns_db.delete({ board: id });
+        await Columns_db_1.Columns_db.delete({ board: candidate });
         await Board_db_1.Board_db.delete({ id: id });
         return candidate;
     }

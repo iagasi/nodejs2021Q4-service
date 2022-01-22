@@ -24,11 +24,8 @@ const getAll = async () => {
  */
 const getById = async (id: string) => {
   const foundBoard = await Board_db.findOne(id,{relations:["columns"]});
-  //const columns=await Columns_db.find({board:foundBoard})
-  // if(foundBoard){
-  //    if(Object.keys(foundBoard).length !== 0){return {...foundBoard,columns}}
-  // }
- console.log(foundBoard);
+ 
+
  
   return foundBoard
 };
@@ -61,7 +58,7 @@ const createNewBoard = async (board: IBoard) => {
  * @param {{id:string ,title:string,columns:Array<string>}}options
  * @returns  found  boarts @type {IBoard}
  */
-const modifyBoard = async (id: any, options: IBoard) => {
+const modifyBoard = async (id: string, options: IBoard) => {
 
 await Board_db.update({id:id},{title:options.title})
 //   const columns1=await Columns_db.find({board:id})
@@ -104,12 +101,9 @@ const candidate=await Board_db.findOne(id)
 
 
  if(candidate){ 
-   const {id}=candidate as {id:any}
+   const {id}=candidate as {id:string}
    await Tasks_db.delete({boardId:id})
-  //  for (const iterator of object) {
-  //     await Columns_db.delete({board:id})
-  //  }
-  await Columns_db.delete({board:id})
+  await Columns_db.delete({board:candidate})
   await Board_db.delete({ id: id });
 return candidate
 }

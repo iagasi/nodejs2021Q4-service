@@ -6,7 +6,7 @@ const allowedAndpoints = (fastify) => {
     fastify.addHook('onRequest', async (req, reply) => {
         const { body, url, query } = req;
         const token = req.headers.authorization;
-        let createUser = false;
+        const createUser = false;
         if (url !== "/login" && url !== "/doc" && url !== "/" && !createUser) {
             let verified;
             if (!token) {

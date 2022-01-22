@@ -7,7 +7,7 @@ export const allowedAndpoints = (fastify: FastifyInstance) => {
                 const { body, url, query } = req as { body: object, url: string, query: object }
                 const token = req.headers.authorization
 
-let createUser=false
+const createUser=false
 //if(url=="/users" &&req.method=="POST"){createUser=true}
 
 

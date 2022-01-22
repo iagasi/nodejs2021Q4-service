@@ -3,12 +3,6 @@ import { type } from "os"
 import { pipeline } from "stream"
 import logger from "./winston"
 
-// const u=(err:any)=>{
-//     return new Promise((resolve,reject) => {
-//         // do some async task
-//         resolve(  logger.error(err.message));
-//      });
-// }
 
 
 function LoggerandErrorHandler(fastify:FastifyInstance):void{
