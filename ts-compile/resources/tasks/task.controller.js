@@ -12,7 +12,6 @@ const getAllTasks = async (_, reply) => {
 const getTaskById = async (req, reply) => {
     const { BOARDID, TASKID } = req.params;
     const found = await (0, task_memory_repository_1.getById)(BOARDID, TASKID);
-    console.log(found);
     if (found) {
         reply
             .code(200)
@@ -37,7 +36,7 @@ const createTask = async (req, reply) => {
 };
 const updateTask = async (req, reply) => {
     const { BOARDID, TASKID } = req.params;
-    const { title, order, description } = req.body;
+    const { title, order, description, userId, boardId } = req.body;
     const updated = await (0, task_memory_repository_1.update)(BOARDID, TASKID, title, order, description);
     if (updated) {
         reply

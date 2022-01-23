@@ -15,7 +15,7 @@ export class Board_db extends BaseEntity {
 
   
     
-    @OneToMany(()=>Columns_db,columns=>columns.id,{ onDelete: 'CASCADE' })
+    @OneToMany(()=>Columns_db,columns=>columns.board,{ onDelete: 'CASCADE' })
    columns:Columns_db[];
 
    

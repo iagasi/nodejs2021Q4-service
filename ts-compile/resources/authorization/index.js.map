@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../src/resources/authorization/index.ts"],"names":[],"mappings":";;AAIC,MAAM,SAAS,GAAG,KAAK,EAAE,OAAwB,EAAE,EAAE;IAGnD,OAAO,CAAC,GAAG,CAAC,IAAI,EAAE,KAAK,EAAC,GAAmB,EAAE,KAAmB,EAAE,EAAE;QAEtE,KAAK,CAAC,IAAI,CAAC,UAAU,CAAC,CAAA;IAEvB,CAAC,CAAC,CAAA;AAEF,CAAC,CAAA;AAED,kBAAe,SAAS,CAAA"}

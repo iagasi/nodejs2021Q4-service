@@ -16,10 +16,7 @@ export class User_db extends BaseEntity {
   @Column()
  password: string
 
-  // @OneToMany(() => Transaction,
-  //   transaction => transaction.user)
-  // transactions: Transaction[]
-
+ 
 
 
 }

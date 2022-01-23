@@ -7,13 +7,13 @@ const setTasks = async (mod) => {
     tasks = mod;
 };
 const getAll = async () => {
-    return await Tasks_db_1.Tasks_db.find({ relations: ["userId", "boardId"] });
+    return await Tasks_db_1.Tasks_db.find();
 };
 exports.getAll = getAll;
 const getById = async (BOARDID, TASKID) => {
     let toReturn;
     if (TASKID) {
-        const byTaskId = await Tasks_db_1.Tasks_db.findOne({ id: TASKID }, { relations: ["userId", "boardId"] });
+        const byTaskId = await Tasks_db_1.Tasks_db.findOne({ id: TASKID });
         toReturn = byTaskId;
     }
     else {
@@ -32,7 +32,6 @@ exports.create = create;
 const update = async (BOARDID, TASKID, title, order, description) => {
     const updated = await Tasks_db_1.Tasks_db.update({ id: TASKID }, { title: title, order: order, description: description });
     const task = await Tasks_db_1.Tasks_db.findOne({ id: TASKID });
-    console.log(task);
     return task;
 };
 exports.update = update;

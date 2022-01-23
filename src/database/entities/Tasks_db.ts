@@ -13,16 +13,22 @@ export class Tasks_db extends BaseEntity{
     order:number
     @Column()
     description: string
-    @ManyToOne(()=>User_db,User_db=>User_db.id)
+
+    @Column({nullable:true})
     userId: string|null
-    @ManyToOne(()=>Board_db,Board_db=>Board_db.id)
+ @ManyToOne(()=>User_db,User_db=>User_db.id)
+ @JoinColumn({name:"userId"})
+    USERID: string|null
+
+
+    @Column({nullable:true})
     boardId: string|null
+@ManyToOne(()=>Board_db,Board_db=>Board_db.id)
+    @JoinColumn({name:"boardId"})
+   BOARDID: string|null
   @Column({nullable:true})
      columnId: string
-//    @ManyToOne(()=>User,
-//    user=>user.transactions)
-//    @JoinColumn({
-//        name:"user_id"
-//    })
-//    user:User
+
 }
+
+

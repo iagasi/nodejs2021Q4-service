@@ -35,7 +35,7 @@ const getTaskById = async(req: FastifyRequest, reply: FastifyReply) => {
   //   (task) => task.boardId === BOARDID || task.id === TASKID
   // );
   const found = await getById(BOARDID, TASKID)
-console.log(found);
+
 
   if (found) {
     reply
@@ -79,7 +79,7 @@ const createTask = async(req: FastifyRequest,reply: FastifyReply) => {
  */
 const updateTask = async(req: FastifyRequest, reply: FastifyReply) => {
    const { BOARDID, TASKID } = req.params as IReqParams;
-   const { title, order, description } = req.body as { title: string, order: number, description: string }
+   const { title, order, description,userId,boardId } = req.body as { title: string, order: number, description: string,userId:string,boardId:string }
   
     const updated=await update(BOARDID,TASKID,title,order,description)
    if(updated){

@@ -10,14 +10,14 @@ const setTasks=async (mod:Array<ITask>)=>{
  tasks=mod
 }
 const getAll=async()=>{
-return await Tasks_db.find({relations: ["userId","boardId"]})
+return await Tasks_db.find()
 }
 
 const getById=async(BOARDID:string,TASKID:string,)=>{
   let toReturn
   if(TASKID){
     
-    const byTaskId=await Tasks_db.findOne({id:TASKID},{relations:["userId","boardId"]})
+    const byTaskId=await Tasks_db.findOne({id:TASKID})
     toReturn=byTaskId
   }
 
@@ -58,7 +58,7 @@ const update=async (BOARDID:string,TASKID:string,title:string,order:number,descr
 const updated=await Tasks_db.update({id:TASKID},{title:title,order:order,description:description})
 
 const task=await Tasks_db.findOne({id:TASKID})
-console.log(task);
+
 return task
 
 

@@ -1,6 +1,6 @@
 import { title } from 'process';
 import { Tasks_db } from '../../database/entities/Tasks_db';
-import { FindCondition, getManager } from 'typeorm';
+import { FindCondition, getManager, getRepository } from 'typeorm';
 import { Board_db } from '../../database/entities/Board_db';
 import { Columns_db } from '../../database/entities/Columns_db';
 import { mergeBoardsColumns } from './functions/mergeBoards.Columns';
@@ -13,7 +13,9 @@ const boards: Array<IBoard> = [];
  *  @type {Array<object>}
  */
 const getAll = async () => {
-  return await Board_db.find();
+  const repo = getRepository(Board_db);
+  const allBoards = await repo.find({relations:["columns"]});
+  return allBoards
 };
 
 /**
@@ -21,8 +23,11 @@ const getAll = async () => {
  * @returns found Board in array @type {object}
  */
 const getById = async (id: string) => {
-  const foundBoard = await Board_db.findOne(id);
-  return foundBoard;
+  const foundBoard = await Board_db.findOne(id,{relations:["columns"]});
+ 
+
+ 
+  return foundBoard
 };
 
 /**
@@ -53,9 +58,9 @@ const createNewBoard = async (board: IBoard) => {
  * @param {{id:string ,title:string,columns:Array<string>}}options
  * @returns  found  boarts @type {IBoard}
  */
-const modifyBoard = async (id: any, options: IBoard) => {
-//   const board1=await Board_db.findOne(id)
-//  await Board_db.update({id:id},{title:options.title})
+const modifyBoard = async (id: string, options: IBoard) => {
+
+await Board_db.update({id:id},{title:options.title})
 //   const columns1=await Columns_db.find({board:id})
 //   await Columns_db.remove(columns1)
 //   const columns2=await Columns_db.find({board:id})
@@ -96,9 +101,9 @@ const candidate=await Board_db.findOne(id)
 
 
  if(candidate){ 
-   const {id}=candidate as {id:any}
+   const {id}=candidate as {id:string}
    await Tasks_db.delete({boardId:id})
-   await Columns_db.delete({board:id})
+  await Columns_db.delete({board:candidate})
   await Board_db.delete({ id: id });
 return candidate
 }
