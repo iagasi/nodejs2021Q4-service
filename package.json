@@ -10,8 +10,8 @@
   "main": "src/server.js",
   "scripts": {
     "start:dev": "nest start --watch",
-    "prod": "node ./dist/server.js",
-    "start": "nodemon --exitcrash -L ./ts-compile/server.js",
+    "prod": "node ./dist/main.js",
+    "start": "nodemon --exitcrash -L ./dist/src/main.js",
     "nodemon": "nodemon",
     "docker-dev": "tsc --watch",
     "lint": "eslint --ext .js,.ts --fix src/",
@@ -52,6 +52,7 @@
     "@nestjs/common": "^8.2.6",
     "@nestjs/jwt": "^8.0.0",
     "@nestjs/platform-express": "^8.2.6",
+    "@nestjs/platform-fastify": "^8.2.6",
     "@nestjs/typeorm": "^8.0.3",
     "@types/jsonwebtoken": "^8.5.8",
     "bcrypt": "^5.0.1",

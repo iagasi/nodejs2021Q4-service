@@ -4,8 +4,10 @@ import { v4 as uuidv4 } from 'uuid'
 @Injectable()
 export class FileService {
 
-    async create(files:any) {
+    async create(files:Array<Express.Multer.File>) {
         try {
+            fs.mkdir( "dist/static/",(err)=>{console.log(err);
+            })
             const fileName = `dist/static/${files[0].originalname}`
             if (!fs.existsSync(fileName)) {
                 fs.writeFileSync(fileName, files[0].buffer)
@@ -21,8 +23,8 @@ export class FileService {
 
     async getByName(name) {
 
-        if (fs.existsSync(`src/uploaded/${name}`)) {
-            const file: any = fs.createReadStream(`src/uploaded/${name}`)
+        if (fs.existsSync(`dist/static/${name}`)) {
+            const file = fs.createReadStream(`dist/static/${name}`)
             return new StreamableFile(file)
         }
         else {

@@ -1,15 +1,10 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './users/user.module';
-import { FileController } from './file/file.controller';
 import { FileModule } from './file/file.module';
-//import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
-import { BoardsController } from './boards/boards.controller';
 import { BoardsModule } from './boards/boards.module';
-import { TasksService } from './tasks/tasks.service';
-import { TasksModule } from './tasks/tasks.module';
+import { CustomHttpInterceptor } from './Logging&ErrorHandling/Middleware';
 
 @Module({
 
@@ -22,9 +17,17 @@ import { TasksModule } from './tasks/tasks.module';
     FileModule,
     AuthModule,
     BoardsModule,
+    CustomHttpInterceptor
     ]
   ,
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+
+  configure(consumer: MiddlewareConsumer) {
+   consumer
+   .apply(CustomHttpInterceptor)
+   .forRoutes({path: "*",method:RequestMethod.ALL})
+  }
+}

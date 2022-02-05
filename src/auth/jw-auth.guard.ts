@@ -9,8 +9,13 @@ export class JwtAuthGuard implements CanActivate{
    
     try{
     
+    
         
 const AuthorizationHeader=req.headers.authorization
+if(!AuthorizationHeader){
+    throw new UnauthorizedException("Auth header not present") 
+   
+}
 const bearer=AuthorizationHeader.split(" ")[0]
 const token=AuthorizationHeader.split(" ")[1]
 

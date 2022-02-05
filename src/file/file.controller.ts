@@ -9,7 +9,9 @@ export class FileController {
 
 @Post()
 @UseInterceptors(AnyFilesInterceptor())
-create(@UploadedFiles() files:any){
+create(@UploadedFiles() files:Array<Express.Multer.File>){
+
+
  return this.fileService.create(files)
 }
 
