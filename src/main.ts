@@ -11,7 +11,7 @@ import { User_db } from './users/user.entity';
 
 import * as dotenv from "dotenv"
 import { HttpExceptionFilter } from './exeptions/http-exeption.filter';
-import { ValidPipe } from './pipes/ValidationPipe';
+
 dotenv.config()
 
 
