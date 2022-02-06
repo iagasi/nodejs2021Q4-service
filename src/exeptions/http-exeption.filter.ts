@@ -9,7 +9,9 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest<Request>();
     const status = exception.getStatus();
 
-console.log(status);
+    console.log(exception);
+    
+
 
      response
     .status(status)
@@ -17,6 +19,7 @@ console.log(status);
         statusCode: status,
       
         path: request.url,
+       message:exception
       
       });
    

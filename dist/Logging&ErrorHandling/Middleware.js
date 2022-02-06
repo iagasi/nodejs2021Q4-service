@@ -10,7 +10,7 @@ exports.CustomHttpInterceptor = void 0;
 const common_1 = require("@nestjs/common");
 const winston_1 = require("./winston");
 let CustomHttpInterceptor = class CustomHttpInterceptor {
-    use(req, res, next) {
+    async use(req, res, next) {
         winston_1.default.info(" body is-" + JSON.stringify(req.body) + " ,url is----" + req.path + ", query is---" + JSON.stringify(req.params));
         next();
         winston_1.default.info("response is ---" + res.statusCode);

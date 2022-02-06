@@ -14,12 +14,13 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         const response = ctx.getResponse();
         const request = ctx.getRequest();
         const status = exception.getStatus();
-        console.log(status);
+        console.log(exception);
         response
             .status(status)
             .json({
             statusCode: status,
             path: request.url,
+            message: exception
         });
     }
 };

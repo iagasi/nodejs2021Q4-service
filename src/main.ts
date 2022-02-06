@@ -11,6 +11,7 @@ import { User_db } from './users/user.entity';
 
 import * as dotenv from "dotenv"
 import { HttpExceptionFilter } from './exeptions/http-exeption.filter';
+import { ValidPipe } from './pipes/ValidationPipe';
 dotenv.config()
 
 
@@ -23,7 +24,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule,);
   
  app.useGlobalPipes(new ValidationPipe())
- //app.useGlobalFilters(new HttpExceptionFilter())
+ app.useGlobalFilters(new HttpExceptionFilter())
 
   await app.listen(PORT);
  
