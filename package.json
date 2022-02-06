@@ -11,7 +11,7 @@
   "scripts": {
     "start:dev": "nest start --watch",
     "prod": "node ./dist/main.js",
-    "start": "nodemon --exitcrash -L ./dist/src/main.js",
+    "start": "nodemon --exitcrash -L ./dist/main.js",
     "nodemon": "nodemon",
     "docker-dev": "tsc --watch",
     "lint": "eslint --ext .js,.ts --fix src/",
