@@ -1,41 +1,21 @@
 {
   "compilerOptions": {
-   
-    "target": "ES2021",                                     /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
-   
-    "module": "commonjs",                                /* Specify what module code is generated. */
-                                                     /* Specify a set of entries that re-map imports to additional lookup locations. */
-     "rootDirs": ["./src"],                                   /* Allow multiple folders to be treated as one when resolving modules. */
-     "outDir": "./ts-compile",
-    "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */
-    // "preserveSymlinks": true,                         /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */
-    "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
-
-    /* Type Checking */
-    "strict": true,                                      /* Enable all strict type-checking options. */
-    "noImplicitAny": true,                            /* Enable error reporting for expressions and declarations with an implied `any` type.. */
-    
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
     "emitDecoratorMetadata": true,
-    
-    "strictPropertyInitialization": false ,   
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
     "skipLibCheck": true,
-		"sourceMap": true,
-		
-		// "moduleResolution": "node",
-		"removeComments": true,
-		
-		"strictNullChecks": true,
-		"strictFunctionTypes": true,
-		"noImplicitThis": true,
-		"noUnusedLocals": false,
-		"noUnusedParameters": false,
-		//"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true,
-		"allowSyntheticDefaultImports": true,
-		
-	
-		"experimentalDecorators": true,
-		"resolveJsonModule": true,
-		 
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false
   }
 }

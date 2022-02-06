@@ -1,13 +1,14 @@
 import { format } from "path/posix";
 import * as winston from "winston"
-import dotenv from 'dotenv'
+import* as dotenv from 'dotenv'
 dotenv.config()
-const combine = winston.format
+
  
 const logger = winston.createLogger({
 
   //  format: winston.format.simple(),
-  level: process.env.WINSTON_ERROR_LEVEL,
+  level: process.env.WINSTON_ERROR_LEVEL||"info",
+  //
     transports: [
    new winston.transports.Console(),
   new winston.transports.File({ filename: './logs/error.log', level: 'error' ,}),

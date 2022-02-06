@@ -25,7 +25,7 @@ services:
     ports:
       - "4000:4000" 
     volumes:
-      -  ./ts-compile:/app/ts-compile
+      - ./logs:/app/logs
     
     restart: on-failure 
     depends_on:
@@ -46,4 +46,3 @@ networks:
           ip_range: "192.168.0.64/26"
           gateway: "192.168.0.1"
           
- 
